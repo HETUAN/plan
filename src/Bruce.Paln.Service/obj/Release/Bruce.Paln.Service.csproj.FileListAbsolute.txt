@@ -1,0 +1,12 @@
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Service.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Service.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Repository.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Dapper.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Entity.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Bruce.Paln.Repository.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Dapper.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\bin\Release\Dapper.xml
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\obj\Release\Bruce.Paln.Service.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\obj\Release\Bruce.Paln.Service.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Service\obj\Release\Bruce.Paln.Service.pdb

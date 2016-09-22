@@ -1,0 +1,15 @@
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.pdb

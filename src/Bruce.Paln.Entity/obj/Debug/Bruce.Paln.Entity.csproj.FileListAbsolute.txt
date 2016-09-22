@@ -1,0 +1,8 @@
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\bin\Debug\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\bin\Debug\Bruce.Paln.Entity.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\obj\Debug\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\obj\Debug\Bruce.Paln.Entity.pdb
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Entity\bin\Debug\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Entity\bin\Debug\Bruce.Paln.Entity.pdb
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Entity\obj\Debug\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\Plan\Bruce.Paln.Entity\obj\Debug\Bruce.Paln.Entity.pdb

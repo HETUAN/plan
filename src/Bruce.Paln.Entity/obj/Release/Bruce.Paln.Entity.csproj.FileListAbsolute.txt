@@ -1,0 +1,4 @@
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\bin\Release\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\bin\Release\Bruce.Paln.Entity.pdb
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\obj\Release\Bruce.Paln.Entity.dll
+E:\HEPW\MySpace\NET\HSolution3\Bruce.Paln.Entity\obj\Release\Bruce.Paln.Entity.pdb
