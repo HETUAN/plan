@@ -16,6 +16,11 @@ namespace Bruce.Paln.Web.Helper
                 else
                     return (int)HttpContext.Current.Session["UserId"];
             }
+            set
+            {
+                HttpContext.Current.Session["UserId"] = value;
+                HttpContext.Current.Session.Timeout = 500;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Bruce.Paln.Entity;
+using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Bruce.Paln.Service
             return _repository.GetModel(UserId, Date);
         }
 
-        public List<WeeklyEntity> GetList(int UserId)
+        public List<WeeklyViewModel> GetList(int UserId)
         {
             return _repository.GetList(UserId);
         }

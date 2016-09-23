@@ -1,6 +1,3 @@
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Plan.Repository.csprojResolveAssemblyReference.cache
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Paln.Repository.dll
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Paln.Repository.pdb
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Bruce.Paln.Repository.dll
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Bruce.Paln.Repository.pdb
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Bruce.Paln.Entity.dll
@@ -8,3 +5,6 @@ E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Dapper.dll
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Bruce.Paln.Entity.pdb
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Dapper.pdb
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\bin\Debug\Dapper.xml
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Plan.Repository.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Paln.Repository.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Repository\obj\Debug\Bruce.Paln.Repository.pdb

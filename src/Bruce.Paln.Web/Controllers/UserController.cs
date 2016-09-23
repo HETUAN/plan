@@ -1,5 +1,6 @@
 ﻿using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Service;
+using Bruce.Paln.Web.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,9 @@ namespace Bruce.Paln.Web.Controllers
             var result = _service.GetViewModel(model.UserName, model.PassWord);
             if (result != null)
             {
-                HttpContext.Session.Add("UserID", result.UserID);
-                HttpContext.Session.Timeout = 500;
+                //HttpContext.Session.Add("UserID", result.UserID);
+                //HttpContext.Session.Timeout = 500;
+                Account.UserId = result.UserID;
                 return RedirectToAction("Home", "Home");
             }
             return View(model);

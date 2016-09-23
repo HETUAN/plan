@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bruce.Paln.Entity;
+using Bruce.Paln.Entity.ViewModel;
 
 namespace Bruce.Paln.Repository
 {
@@ -14,6 +15,7 @@ namespace Bruce.Paln.Repository
             string sql = @"SELECT [Id]
                                   ,[UserId]
                                   ,[DailyDate]
+                                  ,[Title]
                                   ,[Summary]
                                   ,[CreateTime]
                                   ,[UpdateTime]
@@ -21,16 +23,29 @@ namespace Bruce.Paln.Repository
             return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { UserId = UserId, DailyDate = Date.Date });
         }
 
-        public List<DailyEntity> GetList(int UserId)
+        public DailyEntity GetModel(int Id)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
                                   ,[DailyDate]
+                                  ,[Title]
+                                  ,[Summary]
+                                  ,[CreateTime]
+                                  ,[UpdateTime]
+                              FROM [Daily] WHERE Id = @Id";
+            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+        }
+
+        public List<DailyViewModel> GetList(int UserId)
+        {
+            string sql = @"SELECT [Id]
+                                  ,[UserId]
+                                  ,[DailyDate] 
                                   ,[Summary]
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<DailyEntity>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<DailyViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
         }
 
         public int Insert(DailyEntity model)
@@ -38,12 +53,14 @@ namespace Bruce.Paln.Repository
             string sql = @"INSERT INTO [Daily]
                                        ([UserId]
                                        ,[DailyDate]
+                                       ,[Title]
                                        ,[Summary]
                                        ,[CreateTime]
                                        ,[UpdateTime])
                                  VALUES
                                        (@UserId 
                                        ,@DailyDate
+                                       ,@Title
                                        ,@Summary
                                        ,GETDATE()
                                        ,GETDATE())";
@@ -56,7 +73,8 @@ namespace Bruce.Paln.Repository
             string sql = @"UPDATE [Daily]
                                            SET [UserId] = @UserId
                                               ,[DailyDate] = @DailyDate 
-                                              ,[Summary] = @Summary  
+                                              ,[Title] = @Title
+                                              ,[Summary] = @Summary
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";
             return Execute(OpenMsSqlConnection(), sql, model);

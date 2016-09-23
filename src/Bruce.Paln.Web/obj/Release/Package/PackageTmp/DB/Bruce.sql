@@ -117,9 +117,54 @@ ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_dbo.Users_dbo.Roles_RoleID]
 GO
 
 
+---------------------------------------------
 
 
 
+CREATE TABLE [dbo].[Note](
+	[Id] [INT] IDENTITY(1,1) NOT NULL,
+	[UserId] [INT] NOT NULL,
+	[Note] [NTEXT] NOT NULL,
+	[CreateTime] [DATETIME] NOT NULL,
+	[UdateTime] [DATETIME] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Note] ADD  CONSTRAINT [DF_Note_CreateTime]  DEFAULT (GETDATE()) FOR [CreateTime]
+GO
+
+ALTER TABLE [dbo].[Note] ADD  CONSTRAINT [DF_Note_UdateTime]  DEFAULT (GETDATE()) FOR [UdateTime]
+GO
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+CREATE TABLE [dbo].[Weekly](
+	[Id] [INT] IDENTITY(1,1) NOT NULL,
+	[UserId] [INT] NOT NULL,
+	[WeekDate] [DATE] NOT NULL,
+	[Summary] [NTEXT] NOT NULL,
+	[CreateTime] [DATETIME] NOT NULL,
+	[UpdateTime] [DATETIME] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Weekly] ADD  CONSTRAINT [DF_Weekly_WeekDate]  DEFAULT (GETDATE()) FOR [WeekDate]
+GO
+
+ALTER TABLE [dbo].[Weekly] ADD  CONSTRAINT [DF_Weekly_CreateTime]  DEFAULT (GETDATE()) FOR [CreateTime]
+GO
+
+ALTER TABLE [dbo].[Weekly] ADD  CONSTRAINT [DF_Weekly_UpdateTime]  DEFAULT (GETDATE()) FOR [UpdateTime]
+GO
 
 
 

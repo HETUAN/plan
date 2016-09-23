@@ -1,4 +1,5 @@
 ﻿using Bruce.Paln.Entity;
+using Bruce.Paln.Entity.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Bruce.Paln.Repository
         {
             string sql = @"SELECT SELECT [Id]
                                           ,[UserId]
+                                          ,[Title]
                                           ,[Note]
                                           ,[CreateTime]
                                           ,[UpdateTime]
@@ -21,15 +23,15 @@ namespace Bruce.Paln.Repository
             return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
         }
 
-        public List<NoteEntity> GetList(int UserId)
+        public List<NoteViewModel> GetList(int UserId)
         {
             string sql = @"SELECT [Id]
                                 ,[UserId]
-                                ,[Note]
+                                ,[Title] 
                                 ,[CreateTime]
                                 ,[UpdateTime]
                               FROM [Note] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<NoteEntity>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<NoteViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
         }
 
         public int Insert(NoteEntity model)
@@ -37,11 +39,13 @@ namespace Bruce.Paln.Repository
             string sql = @"INSERT INTO [Note]
                                        ([UserId]
                                        ,[Note]
+                                       ,[Title]
                                        ,[CreateTime]
                                        ,[UpdateTime])
                                  VALUES
                                        (@UserId
                                        ,@Note
+                                       ,@Title
                                        ,GETDATE()
                                        ,GETDATE())";
             return Execute(OpenMsSqlConnection(), sql, model);
@@ -52,6 +56,7 @@ namespace Bruce.Paln.Repository
         {
             string sql = @"UPDATE [Note]
                                            SET [UserId] = @UserId
+                                              ,[Title] = @Title  
                                               ,[Note] = @Note  
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";

@@ -99,6 +99,7 @@
     <Content Include="Scripts\bootstrap\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\moment-with-locales.js" />
+    <Content Include="Scripts\daily.js" />
     <Content Include="Scripts\DateExtend.js" />
     <Content Include="Scripts\datetime\jquery-1.11.0.min.js" />
     <Content Include="Scripts\datetime\jquery-ui-1.10.4.custom.min.js" />

@@ -47,8 +47,12 @@ namespace Bruce.Paln.Web.Controllers
         {
             if (startTime == null)
                 startTime = DateTime.Now.Date;
+            else
+                startTime = startTime.Value.Date;
             if (endTime == null)
                 endTime = DateTime.Now.Date.AddDays(1);
+            else
+                endTime = endTime.Value.Date.AddDays(1);
             //var ll = upService.GetVmList().Where(item => item.HappenTime >= startTime.Value.Date && item.HappenTime.Date <= endTime.Value.Date);
             var ll = upService.GetVmList(Account.UserId, (DateTime)startTime, (DateTime)endTime);
             return Json(ll);
@@ -82,6 +86,7 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult Add(UserPlanEntity entity)
         {
+            entity.UserId = Account.UserId;
             int id = upService.Insert(entity);
             var result = new { result = (id > 0 ? true : false) };
             return Json(result);
@@ -96,6 +101,7 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult Edit(UserPlanEntity entity)
         {
+            //entity.UserId = Account.UserId;
             var id = upService.Update(entity);
             var result = new { result = id };
             return Json(result);

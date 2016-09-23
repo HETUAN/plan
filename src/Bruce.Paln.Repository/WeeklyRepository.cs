@@ -1,4 +1,5 @@
 ﻿using Bruce.Paln.Entity;
+using Bruce.Paln.Entity.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Bruce.Paln.Repository
             string sql = @"SELECT [Id]
                                   ,[UserId]
                                   ,[WeekDate]
+                                  ,[Title]
                                   ,[Summary]
                                   ,[CreateTime]
                                   ,[UpdateTime]
@@ -23,16 +25,30 @@ namespace Bruce.Paln.Repository
         }
 
 
-        public List<WeeklyEntity> GetList(int UserId)
+        public WeeklyEntity GetModel(int Id)
+        {
+            //
+            string sql = @"SELECT [Id]
+                                  ,[UserId]
+                                  ,[WeekDate]
+                                  ,[Title]
+                                  ,[Summary]
+                                  ,[CreateTime]
+                                  ,[UpdateTime]
+                              FROM [Weekly] WHERE Id = @Id";
+            return QuerySingle<WeeklyEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+        }
+
+        public List<WeeklyViewModel> GetList(int UserId)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
                                   ,[WeekDate]
-                                  ,[Summary]
+                                  ,[Title]
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Weekly] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<WeeklyEntity>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<WeeklyViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
         }
 
         public int Insert(WeeklyEntity model)
@@ -40,12 +56,14 @@ namespace Bruce.Paln.Repository
             string sql = @"INSERT INTO [Weekly]
                                         ([UserId]
                                         ,[WeekDate]
+                                        ,[Title]
                                         ,[Summary]
                                         ,[CreateTime]
                                         ,[UpdateTime])
                                     VALUES
                                         (@UserId
                                         ,@WeekDate
+                                        ,@Title
                                         ,@Summary
                                        ,GETDATE()
                                        ,GETDATE())";
@@ -58,6 +76,7 @@ namespace Bruce.Paln.Repository
             string sql = @"UPDATE [Weekly]
                                 SET [UserId] = @UserId
                                     ,[WeekDate] = @WeekDate 
+                                    ,[Title] = @Title 
                                     ,[Summary] = @Summary  
                                     ,[UpdateTime] = GETDATE()
                                 WHERE Id = @Id";
