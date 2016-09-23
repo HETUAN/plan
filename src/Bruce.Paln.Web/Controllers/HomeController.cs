@@ -128,7 +128,7 @@ namespace Bruce.Paln.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [UserBaseAuthorizeAttribute]
-        public JsonResult AddResult(PlanResult entity)
+        public JsonResult AddResult(PlanResultEntity entity)
         {
             int id = 0;
             if (prService.ExistResult(entity.PlanId))
@@ -146,7 +146,7 @@ namespace Bruce.Paln.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [UserBaseAuthorizeAttribute]
-        public JsonResult EditResult(PlanResult entity)
+        public JsonResult EditResult(PlanResultEntity entity)
         {
             int id = prService.Update(entity);
             var result = new { result = (id > 0 ? true : false) };

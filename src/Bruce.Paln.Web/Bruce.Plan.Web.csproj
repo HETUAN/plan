@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\UserBaseAuthorizeAttribute.cs" />
@@ -131,6 +132,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Account.cs" />
+    <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -148,16 +151,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Daily\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Paln.Entity.csproj">
+    <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Plan.Entity.csproj">
       <Project>{03544f78-fa8b-42c3-bd19-d2b86d76d267}</Project>
-      <Name>Bruce.Paln.Entity</Name>
+      <Name>Bruce.Plan.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bruce.Paln.Service\Bruce.Paln.Service.csproj">
+    <ProjectReference Include="..\Bruce.Paln.Service\Bruce.Plan.Service.csproj">
       <Project>{005c7ffc-c4bc-49e1-bb48-ec31d37f4cf3}</Project>
-      <Name>Bruce.Paln.Service</Name>
+      <Name>Bruce.Plan.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

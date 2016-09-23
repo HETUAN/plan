@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Paln.Core", "Bruce.Paln.Core\Bruce.Paln.Core.csproj", "{26CCC3A2-32AA-45E8-894C-4B03D468A1B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Plan.Core", "Bruce.Paln.Core\Bruce.Plan.Core.csproj", "{26CCC3A2-32AA-45E8-894C-4B03D468A1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Paln.Entity", "Bruce.Paln.Entity\Bruce.Paln.Entity.csproj", "{03544F78-FA8B-42C3-BD19-D2B86D76D267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Plan.Entity", "Bruce.Paln.Entity\Bruce.Plan.Entity.csproj", "{03544F78-FA8B-42C3-BD19-D2B86D76D267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Paln.Repository", "Bruce.Paln.Repository\Bruce.Paln.Repository.csproj", "{879F4CA7-83C6-4594-A783-AECA73666D2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Plan.Repository", "Bruce.Paln.Repository\Bruce.Plan.Repository.csproj", "{879F4CA7-83C6-4594-A783-AECA73666D2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Paln.Service", "Bruce.Paln.Service\Bruce.Paln.Service.csproj", "{005C7FFC-C4BC-49E1-BB48-EC31D37F4CF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Plan.Service", "Bruce.Paln.Service\Bruce.Plan.Service.csproj", "{005C7FFC-C4BC-49E1-BB48-EC31D37F4CF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Paln.Web", "Bruce.Paln.Web\Bruce.Paln.Web.csproj", "{006BFDD4-F3C4-466B-A852-49C81F41C347}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bruce.Plan.Web", "Bruce.Paln.Web\Bruce.Plan.Web.csproj", "{006BFDD4-F3C4-466B-A852-49C81F41C347}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

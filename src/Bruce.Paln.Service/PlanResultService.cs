@@ -16,17 +16,17 @@ namespace Bruce.Paln.Service
         {
             _repository = new PlanResultRepository();
         }
-        public PlanResult GetModel(int Id)
+        public PlanResultEntity GetModel(int Id)
         {
             return _repository.GetModel(Id);
         }
 
-        public int Insert(PlanResult model)
+        public int Insert(PlanResultEntity model)
         {
             return _repository.Insert(model);
         }
 
-        public int Update(PlanResult model)
+        public int Update(PlanResultEntity model)
         {
             return _repository.Update(model);
         }

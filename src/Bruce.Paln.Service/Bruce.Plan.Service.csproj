@@ -39,21 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyService.cs" />
+    <Compile Include="NoteService.cs" />
     <Compile Include="PlanResultService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="UserPlanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserService.cs" />
+    <Compile Include="WeeklyService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Paln.Entity.csproj">
+    <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Plan.Entity.csproj">
       <Project>{03544f78-fa8b-42c3-bd19-d2b86d76d267}</Project>
-      <Name>Bruce.Paln.Entity</Name>
+      <Name>Bruce.Plan.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bruce.Paln.Repository\Bruce.Paln.Repository.csproj">
+    <ProjectReference Include="..\Bruce.Paln.Repository\Bruce.Plan.Repository.csproj">
       <Project>{879f4ca7-83c6-4594-a783-aeca73666d2a}</Project>
-      <Name>Bruce.Paln.Repository</Name>
+      <Name>Bruce.Plan.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
