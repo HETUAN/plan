@@ -41,7 +41,7 @@ namespace Bruce.Paln.Repository
             string sql = @"SELECT [Id]
                                   ,[UserId]
                                   ,[DailyDate] 
-                                  ,[Summary]
+                                  ,[Title]
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
@@ -64,20 +64,29 @@ namespace Bruce.Paln.Repository
                                        ,@Summary
                                        ,GETDATE()
                                        ,GETDATE())";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return Execute(OpenMsSqlConnection(), sql, new
+            {
+                UserId = model.UserId,
+                DailyDate = model.DailyDate.Date,
+                Title = model.Title,
+                Summary = model.Summary
+            });
         }
 
 
         public int Update(DailyEntity model)
         {
             string sql = @"UPDATE [Daily]
-                                           SET [UserId] = @UserId
-                                              ,[DailyDate] = @DailyDate 
-                                              ,[Title] = @Title
+                                           SET [Title] = @Title
                                               ,[Summary] = @Summary
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return Execute(OpenMsSqlConnection(), sql, new
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Summary = model.Summary
+            });
         }
 
 
