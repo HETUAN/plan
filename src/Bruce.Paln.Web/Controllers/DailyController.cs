@@ -13,6 +13,13 @@ namespace Bruce.Paln.Web.Controllers
     {
         private DailyService _service;
 
+        /// <summary>
+        /// 需求分析：
+        /// 1. 列表页，分页每页五个可以查找。
+        /// 2. 添加，在添加的时候根据当天的日期判断当天的日记是否已经存在，如果已经存在那么就直接跳到编辑页面。
+        /// 3. 编辑就是编辑。
+        /// 4. 暂时没有删除。
+        /// </summary>
         public DailyController()
         {
             _service = new DailyService();
@@ -26,7 +33,12 @@ namespace Bruce.Paln.Web.Controllers
 
         public ActionResult GetModel(int id)
         {
-            return Json(_service.GetMode(id), JsonRequestBehavior.AllowGet);
+            return Json(_service.GetModel(id), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetModelByDate(DateTime date)
+        {
+            return Json(_service.GetModel(Account.UserId, date), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetList()
@@ -59,5 +71,10 @@ namespace Bruce.Paln.Web.Controllers
         {
             return Json(_service.Delete(id));
         }
+
+        //public Action IsExist(DateTime today) { 
+        //    //
+
+        //}
     }
 }

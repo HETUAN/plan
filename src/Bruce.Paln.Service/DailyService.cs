@@ -18,12 +18,12 @@ namespace Bruce.Paln.Service
         }
 
 
-        public DailyEntity GetMode(int UserId, DateTime Date)
+        public DailyEntity GetModel(int UserId, DateTime Date)
         {
             return _repository.GetModel(UserId, Date);
         }
 
-        public DailyEntity GetMode(int id)
+        public DailyEntity GetModel(int id)
         {
             return _repository.GetModel(id);
         }

@@ -95,5 +95,12 @@ namespace Bruce.Paln.Repository
             string sql = @"DELETE FROM [Daily] WHERE Id = @Id";
             return Execute(OpenMsSqlConnection(), sql, new { Id = id });
         }
+
+        public int Count(DateTime today)
+        {
+            string sql = "SELECT COUNT(*) FROM Daily WHERE DailyDate = @Today";
+            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { Today = today.Date });
+        }
+
     }
 }
