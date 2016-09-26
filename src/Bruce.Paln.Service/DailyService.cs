@@ -47,5 +47,15 @@ namespace Bruce.Paln.Service
         {
             return _repository.Delete(id);
         }
+
+        public int Count(DateTime today)
+        {
+            return _repository.Count(today);
+        }
+
+        public bool Exist(int id)
+        {
+            return _repository.Exist(id);
+        }
     }
 }

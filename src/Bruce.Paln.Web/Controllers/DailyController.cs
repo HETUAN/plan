@@ -38,7 +38,15 @@ namespace Bruce.Paln.Web.Controllers
 
         public ActionResult GetModelByDate(DateTime date)
         {
-            return Json(_service.GetModel(Account.UserId, date), JsonRequestBehavior.AllowGet);
+            var result = _service.GetModel(Account.UserId, date);
+            if (result == null)
+            {
+                return Json(new { }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult GetList()
@@ -54,7 +62,7 @@ namespace Bruce.Paln.Web.Controllers
             model.DailyDate = DateTime.Now.Date;
             model.CreateTime = DateTime.Now;
             model.UpdateTime = DateTime.Now;
-            return Json(new { result = _service.Insert(model) > 0 });
+            return Json(new { result = (_service.Count(DateTime.Now) <= 0 ? _service.Insert(model) : _service.Update(model)) > 0 });
         }
 
         [HttpPost]

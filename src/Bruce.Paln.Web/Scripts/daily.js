@@ -48,9 +48,9 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                     var DailyDate = eval(data[i].DailyDate.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"));
                     content += '                            <tr>';
                     content += '                                <td>' + data[i].Id + '</td>';
-                    content += '                                <td>' + data[i].Title + '</td>';
+                    content += '                                <td>' + data[i].Title.substr(0, 30) + '</td>';
                     content += '                                <td>' + DailyDate.Formate("yyyy-MM-dd") + '</td>';
-                    content += '                                <td><a>编辑</a>' + '' + '</td>';
+                    content += '                                <td><button type="button" class="btn btn-link" tag="DailyListEdit" val="' + data[i].Id + '">编辑</button>' + '' + '</td>';
                     content += '                            </tr>';
                 }
                 content += '                        </tbody>';
@@ -89,6 +89,14 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                '</div> ' +
            '</div>');
             $("body").append(model);
+            var btns = $("button[val][tag='DailyListEdit'] ")
+            btns.each(function (idx, btn) {
+                //console.log(btn);
+                btn.onclick = function () {
+                    var dd = new Daily();
+                    dd.DailyEdit($(this).attr("val"));
+                }
+            });
             model.modal();
             model.on('hide.bs.modal',
                 function () {
@@ -98,7 +106,7 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
         })
     }
 
-
+    //添加Daily
     Daily.prototype.DailyAdd = function () {
         //todo 添加有重复根据日期限定或约束,添加和修改可以功能区分.
         console.log(this);
@@ -113,6 +121,7 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
             //});
             $("#DailyAddConfirm")[0].onclick = function () {
                 //
+                console.log("DailyAddConfirm");
                 var param = {};
                 param.Id = $("#DailyId").val();
                 param.Title = $("#DailyAddTitle").val().trim();
@@ -131,110 +140,72 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                 //    alert("请输入日期");
                 //    return;
                 //}
-                $.post("/Daily/Add", param, function (data) {
+                var url = param.Id == 0 ? "/Daily/Add" : "/Daily/Edit";
+                $.post(url, param, function (data) {
                     //
                     if (data.result) {
                         $("#DailyAddModal").remove();
                     } else {
-                        alert("添加失败！");
+                        alert("失败！");
                     }
                 });
             }
             node.modal();
         })
-        return;
-
-        var model = $('<div class="modal fade" id="DailyAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
-           '<div class="modal-dialog">' +
-               '<div class="modal-content">' +
-                   '<div class="modal-header">' +
-                       '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×' +
-                       '</button>' +
-                       '<h4 class="modal-title" id="DailyAddModalLabel">' +
-                           '确认弹出框' +
-                       '</h4>' +
-                   '</div>' +
-
-                   '<div class="modal-body">' +
-
-                    '<form class="form-horizontal" role="form">' +
-                    '    <input type="hidden" id="DailyId" value="0" />' +
-                    '    <div class="form-group">' +
-                    '        <label for="DailyAddTitle" class="col-sm-2 control-label">标题</label>' +
-                    '        <div class="col-sm-10">' +
-                    '            <input type="text" class="form-control" id="DailyAddTitle" placeholder="请输入名字">' +
-                    '        </div>' +
-                    '    </div>' +
-                    '    <div class="form-group">' +
-                    '        <label for="DailyAddSummary" class="col-sm-2 control-label">详细说明</label>' +
-                    '        <div class="col-sm-10">' +
-                    '            <textarea class="form-control" id="DailyAddSummary" rows="3"></textarea>' +
-                    '        </div>' +
-                    '    </div>' +
-                    //'    <div class="form-group">' +
-                    //'        <label for="DailyDate" class="col-sm-2 control-label">日记</label> ' +
-                    //'        <div class="col-sm-9 input-group date" style="padding-left: 15px;" id="DailyDatedatetimepicker">' +
-                    //'            <input type="text" id="DailyDate" class="form-control" />' +
-                    //'            <span class="input-group-addon">' +
-                    //'                <span class="glyphicon glyphicon-calendar"></span>' +
-                    //'            </span>' +
-                    //'        </div>' +
-                    //'    </div>' +
-                    '</form>' +
-
-                    '</div>' +
-                    '<div class="modal-footer">' +
-                        '<button type="button" class="btn btn-default" data-dismiss="modal">' +
-                            '关闭' +
-                        '</button>' +
-                        '<button type="button" id="DailyAddConfirm" class="btn btn-primary">' +
-                            '确认' +
-                        '</button>' +
-                    '</div>' +
-                '</div>' +
-            '</div> ' +
-            '</div>');
-        $("body").append(model);
-        console.log($("DailyDatedatetimepicker"));
-        //$("DailyDatedatetimepicker").datetimepicker({
-        //    defaultDate: new Date(),
-        //});
-        $("#DailyAddConfirm")[0].onclick = function () {
-            //
-            var param = {};
-            param.Id = $("#DailyId").val();
-            param.Title = $("#DailyAddTitle").val().trim();
-            param.Summary = $("#DailyAddSummary").val().trim();
-            param.DailyDate = new Date().Formate('yyyy-MM-dd');
-            //param.Date = $("#DailyAddDate").val().trim();
-            if (param.Title == "") {
-                alert("请输入标题");
-                return;
-            }
-            if (param.Summary == "") {
-                alert("请输入详细信息");
-                return;
-            }
-            //if (param.Date == "") {
-            //    alert("请输入日期");
-            //    return;
-            //}
-            $.post("/Daily/Add", param, function (data) {
-                //
-                if (data.result) {
-                    $("#DailyAddModal").remove();
-                } else {
-                    alert("添加失败！");
-                }
-            });
-        }
-        model.modal();
     }
 
+    // 编辑
+    Daily.prototype.DailyEdit = function (id) {
+        console.log(this);
+        if (id == null) {
+            return;
+        }
+        var url = "/Daily/GetModel?id=" + id;
+        $.get(url, function (data) {
+            var d = new Daily();
+            var node = d.CreateModel(data);
+            $("body").append(node);
+            $("#DailyAddConfirm")[0].onclick = function () {
+                //
+                console.log("DailyAddConfirm");
+                var param = {};
+                param.Id = $("#DailyId").val();
+                param.Title = $("#DailyAddTitle").val().trim();
+                param.Summary = $("#DailyAddSummary").val().trim();
+                param.DailyDate = new Date().Formate('yyyy-MM-dd');
+                //param.Date = $("#DailyAddDate").val().trim();
+                if (param.Title == "") {
+                    alert("请输入标题");
+                    return;
+                }
+                if (param.Summary == "") {
+                    alert("请输入详细信息");
+                    return;
+                }
+                var url = param.Id == 0 ? "/Daily/Add" : "/Daily/Edit";
+                $.post(url, param, function (data) {
+                    if (data.result) {
+                        $("#DailyAddModal").remove();
+                    } else {
+                        alert("失败！");
+                    }
+                });
+            }
+            console.log($("#DailyAddConfirm").first());
+            node.modal();
+            node.on('hide.bs.modal',
+                function () {
+                    console.log($(this));
+                    $(this).remove();
+                })
+        })
+    }
+
+    // 根据实体生成Model节点
     Daily.prototype.CreateModel = function (model) {
 
         var node;
-        if (model == null) {
+        if (model.Id == null) {
             node = $('<div class="modal fade" id="DailyAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                               '<div class="modal-dialog">' +
                                   '<div class="modal-content">' +

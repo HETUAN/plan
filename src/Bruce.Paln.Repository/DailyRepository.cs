@@ -102,5 +102,11 @@ namespace Bruce.Paln.Repository
             return QuerySingle<int>(OpenMsSqlConnection(), sql, new { Today = today.Date });
         }
 
+        public bool Exist(int id)
+        {
+            string sql = "SELECT COUNT(*) FROM Daily WHERE Id = @id";
+            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { Id = id }) > 0;
+        }
+
     }
 }
