@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bruce.Paln.Entity;
 using Bruce.Paln.Entity.ViewModel;
+using Dapper;
 
 namespace Bruce.Paln.Repository
 {
@@ -46,6 +47,48 @@ namespace Bruce.Paln.Repository
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
             return Query<DailyViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+        }
+
+        public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, DateTime? date, out int rows)
+        {
+            // 
+            string sql = @"SELECT   [Id] ,
+                                    [UserId] ,
+                                    [DailyDate] ,
+                                    [Title] ,
+                                    [CreateTime] ,
+                                    [UpdateTime]
+                            FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY DailyDate DESC ) AS OrderId ,
+                                                *
+                                      FROM      [Daily]
+                                    ) T
+                            WHERE UserId = @UserId AND OrderId BETWEEN @StartIndex AND @EndIndex {0} ORDER BY DailyDate DESC;
+                           SELECT COUNT(1) FROM [Daily] WHERE UserId = @UserId {}";
+            List<string> where = new List<string>();
+            if (title.Trim() != "")
+                where.Add("Ttile LIKE '%'+@Title+'%'");
+            if (date != null)
+            {
+                using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+                {
+                    where.Add("DailyDate = @DailyDate");
+                    var multi = connection.QueryMultiple(string.Format(sql, " AND " + string.Join(" AND ", where)), new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title, DailyDate = date.Value.Date });
+                    var dailyList = multi.Read<DailyViewModel>().ToList();
+                    rows = multi.Read<int>().FirstOrDefault();
+                    return dailyList;
+                }
+            }
+            else
+            {
+
+                using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+                {
+                    var multi = connection.QueryMultiple(string.Format(sql, " AND " + string.Join(" AND ", where)), new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
+                    var dailyList = multi.Read<DailyViewModel>().ToList();
+                    rows = multi.Read<int>().FirstOrDefault();
+                    return dailyList;
+                }
+            }
         }
 
         public int Insert(DailyEntity model)

@@ -54,6 +54,14 @@ namespace Bruce.Paln.Web.Controllers
             return Json(_service.GetList(Account.UserId), JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult GetList(int pageindex, int pageSize, string title, string date)
+        {
+            int rows = 0;
+            var list = _service.GetList(Account.UserId, pageindex, pageSize, title, Convert.ToDateTime(date), out rows);
+            return Json(new { rowCount = rows, List = list }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Add(DailyEntity model)
         {
