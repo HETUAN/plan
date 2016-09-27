@@ -55,11 +55,14 @@ namespace Bruce.Paln.Web.Controllers
         }
 
 
-        public ActionResult GetList(int pageindex, int pageSize, string title, string date)
+        public ActionResult GetListPager(int pageindex, int pageSize, string title, string date)
         {
+            DateTime? dt = null;
             int rows = 0;
-            var list = _service.GetList(Account.UserId, pageindex, pageSize, title, Convert.ToDateTime(date), out rows);
-            return Json(new { rowCount = rows, List = list }, JsonRequestBehavior.AllowGet);
+            if (date != "")
+                dt = Convert.ToDateTime(date);
+            var list = _service.GetList(Account.UserId, pageindex, pageSize, title, dt, out rows);
+            return Json(new { rowCount = rows, curIndex = pageindex, List = list }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

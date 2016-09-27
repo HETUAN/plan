@@ -63,7 +63,7 @@ namespace Bruce.Paln.Repository
                                       FROM      [Daily]
                                     ) T
                             WHERE UserId = @UserId AND OrderId BETWEEN @StartIndex AND @EndIndex {0} ORDER BY DailyDate DESC;
-                           SELECT COUNT(1) FROM [Daily] WHERE UserId = @UserId {}";
+                           SELECT COUNT(1) FROM [Daily] WHERE UserId = @UserId {0}";
             List<string> where = new List<string>();
             if (title.Trim() != "")
                 where.Add("Ttile LIKE '%'+@Title+'%'");
@@ -72,7 +72,8 @@ namespace Bruce.Paln.Repository
                 using (System.Data.IDbConnection connection = OpenMsSqlConnection())
                 {
                     where.Add("DailyDate = @DailyDate");
-                    var multi = connection.QueryMultiple(string.Format(sql, " AND " + string.Join(" AND ", where)), new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title, DailyDate = date.Value.Date });
+                    var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
+                    var multi = connection.QueryMultiple(qsql, new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title, DailyDate = date.Value.Date });
                     var dailyList = multi.Read<DailyViewModel>().ToList();
                     rows = multi.Read<int>().FirstOrDefault();
                     return dailyList;
@@ -83,7 +84,8 @@ namespace Bruce.Paln.Repository
 
                 using (System.Data.IDbConnection connection = OpenMsSqlConnection())
                 {
-                    var multi = connection.QueryMultiple(string.Format(sql, " AND " + string.Join(" AND ", where)), new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
+                    var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
+                    var multi = connection.QueryMultiple(qsql, new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
                     var dailyList = multi.Read<DailyViewModel>().ToList();
                     rows = multi.Read<int>().FirstOrDefault();
                     return dailyList;

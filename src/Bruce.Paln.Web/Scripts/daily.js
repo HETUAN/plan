@@ -17,26 +17,34 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
     var Daily = function () { }
 
     // 显示列表，未分分页
-    Daily.prototype.DailyList = function () {
+    Daily.prototype.DailyList = function (index) {
         //
-        $.get("/Daily/GetList", function (data) {
+        var pageSize = 5;//$("#dailyPagerSize").val();
+        var pageIndex = index == null ? $("#dailyPager ul li[class='active']").text() : index;
+        var title = $("#dailyPagerTitle").val();
+        var date = $("#dailyPagerDate").val();
+        if (pageIndex == null || pageIndex == "")
+            pageIndex = 1;
+        title = title == undefined ? "" : title;
+        date = date == undefined ? "" : date;
+
+        var param = "pageindex=" + pageIndex + "&pageSize=" + pageSize + "&title=" + title + "&date=" + date;
+        $.get("/Daily/GetListPager?" + param, function (data) {
             var content = "";
             if (data == null) {
                 content = "没有数据";
             } else {
                 content += '<div class="row">';
                 content += '   <div class="col-md-12">';
-                content += '      <!--   Kitchen Sink -->';
                 content += '        <div class="panel panel-default">';
-                content += '            <div class="panel-heading';
-                content += '                Kitchen Sink';
+                content += '            <div class="panel-heading>';
                 content += '            </div>';
                 content += '            <div class="panel-body">';
-                content += '                <div class="table-responsive">';
+                content += '                <div id="dailyListContent" class="table-responsive">';
                 content += '                    <table class="table table-striped table-bordered table-hover">';
                 content += '                        <thead>';
                 content += '                            <tr>';
-                content += '                                <th>编号</th>';
+                //content += '                                <th>编号</th>';
                 content += '                                <th>标题</th>';
                 content += '                                <th>时间</th>';
                 content += '                                <th>操作</th>';
@@ -44,21 +52,21 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                 content += '                        </thead>';
                 content += '                        <tbody>';
 
-                for (var i = 0; i < data.length; i++) {
-                    var DailyDate = eval(data[i].DailyDate.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"));
+                for (var i = 0; i < data.List.length; i++) {
+                    var DailyDate = eval(data.List[i].DailyDate.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"));
                     content += '                            <tr>';
-                    content += '                                <td>' + data[i].Id + '</td>';
-                    content += '                                <td>' + data[i].Title.substr(0, 30) + '</td>';
+                    //content += '                                <td>' + data[i].Id + '</td>';
+                    content += '                                <td>' + data.List[i].Title.substr(0, 30) + '</td>';
                     content += '                                <td>' + DailyDate.Formate("yyyy-MM-dd") + '</td>';
-                    content += '                                <td><button type="button" class="btn btn-link" tag="DailyListEdit" val="' + data[i].Id + '">编辑</button>' + '' + '</td>';
+                    content += '                                <td><button type="button" class="btn btn-link" tag="DailyListEdit" val="' + data.List[i].Id + '">编辑</button>' + '' + '</td>';
                     content += '                            </tr>';
                 }
                 content += '                        </tbody>';
                 content += '                    </table>';
                 content += '                </div>';
                 content += '            </div>';
+                content += '            <div class="panel-footer" id="dailyListFooter" ></div>';
                 content += '        </div>';
-                content += '         <!-- End  Kitchen Sink -->';
                 content += '    </div>';
                 content += '</div>';
             }
@@ -97,6 +105,8 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                     dd.DailyEdit($(this).attr("val"));
                 }
             });
+            var ddd = new Daily();
+            ddd.Pager(data.rowCount, 5, data.curIndex);
             model.modal();
             model.on('hide.bs.modal',
                 function () {
@@ -199,6 +209,69 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                     $(this).remove();
                 })
         })
+    }
+
+    Daily.prototype.Pager = function (rows, pageSize, curIdx) {
+        //
+        var html = '';
+        html += '<div class="row" id="dailyPager">';
+        //html += '    <div class="col-sm-2">';
+        //html += '        <div class="dataTables_info" id="dailyPager_info" role="alert" aria-live="polite" aria-relevant="all">';
+        //html += '        </div>';
+        //html += '    </div>';
+        //html += '    <div class="col-sm-2">';
+        //html += '    </div>';
+        html += '    <div class="col-sm-10">';
+
+        html += '        <div style="float:left; margin-top:3px; margin-right:5px; display:none;">';
+        html += '            <select id="dailyPagerSize" class="input-sm">';
+        html += '                <option value="10">10</option>';
+        html += '                <option value="25">25</option>';
+        html += '                <option value="50">50</option>';
+        html += '                <option value="100">100</option>';
+        html += '            </select>';
+        html += '        </div>';
+
+        html += '        <div  style="float:left;">';
+        html += '        <ul id="dailyPager" class="pagination" style="margin:0px;">';
+        //var pageSize = 5;//$("#dailyPagerSize").val();
+        var pages = rows / pageSize;
+        var startPidx = parseInt(curIdx / 5) * 5 + 1;
+        var endPidx = startPidx + 5;
+
+        html += '            <li><a href="#" val="' + (curIdx - 1) + '">&laquo;</a></li>';
+
+        for (; startPidx < endPidx; startPidx++) {
+            //
+            if (startPidx == curIdx) {
+                html += '            <li class="active"><a href="#" val="' + startPidx + '">' + startPidx + '</a></li>';
+            } else {
+                html += '            <li><a href="#" val="' + startPidx + '">' + startPidx + '</a></li>';
+            }
+        }
+        html += '            <li><a href="#" val="' + (curIdx + 1) + '">&raquo;</a></li>';
+        html += '        </ul>';
+        html += '        </div>';
+
+        html += '    </div>';
+        html += '</div>';
+        var node = $(html);
+        $("#dailyListFooter").append(node);
+        $("#dailyPagerSize").change = function () {
+            var d = new Daily();
+            d.DailyList();
+        }
+
+        $("#dailyPager li a").each(function () {
+            console.log($(this));
+            $(this)[0].onclick = function () {
+                //console.log($(this));
+                console.log($(this).attr("val"));
+                var d = new Daily();
+                d.DailyList($(this).attr("val"));
+            }
+        });
+
     }
 
     // 根据实体生成Model节点
