@@ -115,6 +115,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\note.js" />
     <Content Include="Scripts\plan.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
@@ -127,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\UserBaseAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -153,6 +155,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Daily\" />
+    <Folder Include="Views\Note\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Plan.Entity.csproj">

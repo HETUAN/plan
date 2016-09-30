@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace Bruce.Paln.Repository
 {
@@ -13,13 +14,13 @@ namespace Bruce.Paln.Repository
 
         public NoteEntity GetModel(int Id)
         {
-            string sql = @"SELECT SELECT [Id]
-                                          ,[UserId]
-                                          ,[Title]
-                                          ,[Note]
-                                          ,[CreateTime]
-                                          ,[UpdateTime]
-                                      FROM [Note] WHERE Id = @Id";
+            string sql = @"SELECT [Id]
+                                ,[UserId]
+                                ,[Title]
+                                ,[Note]
+                                ,[CreateTime]
+                                ,[UpdateTime]
+                            FROM [Note] WHERE Id = @Id";
             return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
         }
 
@@ -32,6 +33,36 @@ namespace Bruce.Paln.Repository
                                 ,[UpdateTime]
                               FROM [Note] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
             return Query<NoteViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+        }
+
+
+        public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, out int rows)
+        {
+            // 
+            string sql = @"SELECT   [Id] ,
+                                    [UserId] ,
+                                    [Title] ,
+                                    [CreateTime] ,
+                                    [UpdateTime]
+                            FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY CreateTime DESC ) AS OrderId ,
+                                                *
+                                      FROM      [Note]
+                                    ) T
+                            WHERE UserId = @UserId AND OrderId > @StartIndex  AND OrderId <= @EndIndex {0} ORDER BY CreateTime DESC;
+                           SELECT COUNT(1) FROM [Note] WHERE UserId = @UserId {0}";
+            List<string> where = new List<string>();
+            if (title.Trim() != "")
+                where.Add("Ttile LIKE '%'+@Title+'%'");
+
+            using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+            {
+
+                var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
+                var multi = connection.QueryMultiple(qsql, new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
+                var dailyList = multi.Read<DailyViewModel>().ToList();
+                rows = multi.Read<int>().FirstOrDefault();
+                return dailyList;
+            }
         }
 
         public int Insert(NoteEntity model)
@@ -55,8 +86,7 @@ namespace Bruce.Paln.Repository
         public int Update(NoteEntity model)
         {
             string sql = @"UPDATE [Note]
-                                           SET [UserId] = @UserId
-                                              ,[Title] = @Title  
+                                           SET [Title] = @Title  
                                               ,[Note] = @Note  
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";

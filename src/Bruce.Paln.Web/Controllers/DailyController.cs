@@ -53,8 +53,7 @@ namespace Bruce.Paln.Web.Controllers
         {
             return Json(_service.GetList(Account.UserId), JsonRequestBehavior.AllowGet);
         }
-
-
+        
         public ActionResult GetListPager(int pageindex, int pageSize, string title, string date)
         {
             DateTime? dt = null;

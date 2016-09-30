@@ -28,6 +28,11 @@ namespace Bruce.Paln.Service
             return _repository.GetList(UserId);
         }
 
+        public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, out int rows)
+        {
+            return _repository.GetList(userId, pageIndex, pageSize, title, out rows);
+        }
+
         public int Insert(NoteEntity model)
         {
             return _repository.Insert(model);

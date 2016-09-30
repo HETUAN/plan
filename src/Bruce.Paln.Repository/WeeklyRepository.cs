@@ -20,8 +20,10 @@ namespace Bruce.Paln.Repository
                                   ,[Summary]
                                   ,[CreateTime]
                                   ,[UpdateTime]
-                              FROM [Weekly] WHERE UserId = @UserId AND DailyDate = @DailyDate";
-            return QuerySingle<WeeklyEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, DailyDate = date.Date });
+                              FROM [Weekly] WHERE UserId = @UserId 
+                                            AND  @WeekDate >= DATEADD(DAY,2-DATEPART(weekday,WeekDate),WeekDate)
+                                            AND @WeekDate <= DATEADD(DAY,8-DATEPART(weekday,WeekDate),WeekDate)";
+            return QuerySingle<WeeklyEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, WeekDate = date.Date });
         }
 
 
@@ -74,9 +76,7 @@ namespace Bruce.Paln.Repository
         public int Update(WeeklyEntity model)
         {
             string sql = @"UPDATE [Weekly]
-                                SET [UserId] = @UserId
-                                    ,[WeekDate] = @WeekDate 
-                                    ,[Title] = @Title 
+                                SET  [Title] = @Title 
                                     ,[Summary] = @Summary  
                                     ,[UpdateTime] = GETDATE()
                                 WHERE Id = @Id";
