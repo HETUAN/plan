@@ -7,6 +7,7 @@
         datetimepicker: '../Scripts/bootstrap/bootstrap-datetimepicker',
         DateExtend: '../Scripts/DateExtend',
         User: '../Scripts/user',
+        Daily: '../Scripts/daily',
         //jqueryui: '../Scripts/datetime/jquery-ui-1.10.4.custom.min.js',
         //jqueryuidatepickerCN: '../Scripts/datetime/jquery.ui.datepicker-zh-CN.js',
         //jqueryuitimepacker: '../Scripts/datetime/jquery-ui-timepicker-addon.js',
@@ -19,7 +20,7 @@
     }
 });
 
-define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User) {
+define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily) {
     //console.log($);
     var $ = jQuery;
     var planVM = function () { }
@@ -108,16 +109,6 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User']
         $("#collapse" + idx).collapse('show');
     }
 
-    //var getTimeFormateStr = function (date) {
-    //    //this.getHours()>9?this.getHours().toString():'0' + this.getHours()
-    //    //var date = new Date(parseInt(jsonDate.substr(6)));
-    //    //var date = eval(jsonDate.replace(/\/Date\((\d+)\)\//gi, "new Date($1)")); 
-    //    return (date.getMonth() > 9 ? date.getMonth().toString() : '0' + date.getMonth().toString())
-    //           + "-" + (date.getDate() > 0 ? date.getDate().toString() : '0' + date.getDate().toString())
-    //           + " " + (date.getHours() > 9 ? date.getHours().toString() : '0' + date.getHours().toString())
-    //           + ":" + (date.getMinutes() > 9 ? date.getMinutes().toString() : '0' + date.getMinutes().toString());
-    //}
-
     // 重新加载数据 已经弃用
     planVM.prototype.ReloadData = function () {
         var type = $("input[name='showModel']").val();
@@ -191,7 +182,7 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User']
     // 删除
     planVM.prototype.Delete = function (entityId) {
         //
-        confirm("safdasdf", function () {
+        confirm("确定要删除吗？", function () {
             $.post("/Home/Delete", { Id: entityId }, function (data) {
                 if (data.result) {
                     var p = new planVM();
@@ -362,6 +353,23 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User']
             var p = new planVM();
             p.LoadData();
         }
+
+        //日记列表
+        // 添加模态提交事件
+        $("#DailyList")[0].onclick = function () {
+            console.log("DailyList");
+            var daily = new Daily.Daily();
+            daily.DailyList();
+        }
+
+        //日记列表
+        // 添加模态提交事件
+        $("#DailyAdd")[0].onclick = function () {
+            console.log("DailyAdd");
+            var daily = new Daily.Daily();
+            daily.DailyAdd();
+        }
+
     }
 
     planVM.prototype.BindViewDate = function (type) {

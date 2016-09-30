@@ -182,7 +182,7 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     // 删除
     planVM.prototype.Delete = function (entityId) {
         //
-        confirm("safdasdf", function () {
+        confirm("确定要删除吗？", function () {
             $.post("/Home/Delete", { Id: entityId }, function (data) {
                 if (data.result) {
                     var p = new planVM();

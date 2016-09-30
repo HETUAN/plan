@@ -62,7 +62,7 @@ namespace Bruce.Paln.Repository
                                                 *
                                       FROM      [Daily]
                                     ) T
-                            WHERE UserId = @UserId AND OrderId BETWEEN @StartIndex AND @EndIndex {0} ORDER BY DailyDate DESC;
+                            WHERE UserId = @UserId AND OrderId > @StartIndex  AND OrderId <= @EndIndex {0} ORDER BY DailyDate DESC;
                            SELECT COUNT(1) FROM [Daily] WHERE UserId = @UserId {0}";
             List<string> where = new List<string>();
             if (title.Trim() != "")
