@@ -117,8 +117,10 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\note.js" />
     <Content Include="Scripts\plan.js" />
+    <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
+    <Content Include="Scripts\ring.mp3" />
     <Content Include="Scripts\user.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -145,6 +147,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Scripts\learn\jx.base.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
