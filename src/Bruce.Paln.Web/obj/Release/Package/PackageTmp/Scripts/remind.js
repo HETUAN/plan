@@ -6,12 +6,8 @@
     }
 });
 define(['jquery', 'DateExtend'], function ($, DateExtend) {
-    var Remind = function () {
-        this.RemindList = [];
-        this.audio = document.createElement("audio");
-        this.audio.src = "../Scripts/ring.mp3";
-    }
-    Remind.prototype.StartRemind = function (plan,callback) {
+    var Remind = function () { this.RemindList = []; }
+    Remind.prototype.StartRemind = function (plan) {
         //此处应该使用将数据处理成提醒的时间点和信息的数组，然后每隔x毫秒遍历一遍看是否有到达时间的项，有则响铃并将数据移除。
         this.ClearTimeOut();
         if (plan == null) return;
@@ -26,14 +22,14 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
                 //开始时间在当前时间之前。
                 var runtime = HappenTime.SubToMilliseconds(curdate);
                 var msg = item.Tag + " --> 任务开始";
-                this.Run(msg, runtime, callback);
+                this.Run(msg, runtime);
             }
 
             if (HappenTime.AddMinute(item.UseTime).Compare(curdate) > 0) {
                 //结束时间在当前时间之前。
                 var runtime = HappenTime.SubToMilliseconds(curdate);
                 var msg = item.Tag + " --> 任务结束";
-                this.Run(msg, runtime, callback);
+                this.Run(msg, runtime);
             }
         }
         console.log(this.RemindList);
@@ -48,24 +44,18 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
         }
     }
 
-    Remind.prototype.Run = function (msg, milliseconds, callback) {
+    Remind.prototype.Run = function (msg, milliseconds) {
         //播放音乐
-        console.log(callback);
-        var r = setTimeout(function () { var r = new Remind(); r.PlayMusic(msg, callback); }, milliseconds);
+        var r = setTimeout(function () { var r = new Remind(); r.PlayMusic(msg); }, milliseconds);
         this.RemindList.push(r);
     }
 
-    Remind.prototype.PlayMusic = function (msg, callback) {
+    Remind.prototype.PlayMusic = function (msg) {
         //
-        console.log(callback);
-        this.audio.play();
-        setTimeout(function () { new Remind().Alert(msg, callback); }, 500);
-    }
-
-    Remind.prototype.Alert = function (msg, callback) {
-        alert(msg);
-        console.log(callback);
-        callback || callback();
+        var audio = document.createElement("audio");
+        audio.src = "../Scripts/ring.mp3";
+        audio.play();
+        setTimeout(function () { alert(msg); }, 500);
     }
 
     return { Remind: Remind }

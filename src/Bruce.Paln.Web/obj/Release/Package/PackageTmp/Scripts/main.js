@@ -8,6 +8,8 @@
         DateExtend: '../Scripts/DateExtend',
         User: '../Scripts/user',
         Daily: '../Scripts/daily',
+        Note: '../Scripts/note',
+        Remind: '../Scripts/remind',
         //jqueryui: '../Scripts/datetime/jquery-ui-1.10.4.custom.min.js',
         //jqueryuidatepickerCN: '../Scripts/datetime/jquery.ui.datepicker-zh-CN.js',
         //jqueryuitimepacker: '../Scripts/datetime/jquery-ui-timepicker-addon.js',
@@ -20,7 +22,7 @@
     }
 });
 
-define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily) {
+define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind) {
     //console.log($);
     var $ = jQuery;
     var planVM = function () { }
@@ -50,6 +52,11 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 //console.log(data); 
                 var p = new planVM();
                 p.TransferJsonToHtml(data);
+
+                //设置提醒
+                var r = new Remind.Remind();
+                r.StartRemind(data);
+
                 p.ReBindDeleteAndEditEvent();
             } else {
                 console.log("error");
@@ -131,6 +138,11 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 //console.log(plan.text());
                 plan.empty();
                 plan.append(TransferJsonToHtml(data));
+
+                //设置提醒
+                var r = new Remind.Remind();
+                r.StartRemind(data);
+
                 new planVM().ReBindDeleteAndEditEvent();
             } else {
                 console.log("error");
@@ -354,20 +366,33 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
             p.LoadData();
         }
 
-        //日记列表
-        // 添加模态提交事件
+        //日记列表 
         $("#DailyList")[0].onclick = function () {
             console.log("DailyList");
             var daily = new Daily.Daily();
             daily.DailyList();
         }
 
-        //日记列表
-        // 添加模态提交事件
+        // 添加日记模态提交事件
         $("#DailyAdd")[0].onclick = function () {
             console.log("DailyAdd");
             var daily = new Daily.Daily();
             daily.DailyAdd();
+        }
+
+        //便签列表 
+        $("#NoteList")[0].onclick = function () {
+            console.log("NoteList");
+            var note = new Note.Note();
+            note.NoteList();
+        }
+
+        //便签列表
+        // 添加模态提交事件
+        $("#NoteAdd")[0].onclick = function () {
+            console.log("NoteAdd");
+            var note = new Note.Note();
+            note.NoteAdd();
         }
 
     }
@@ -468,6 +493,9 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     //User.LoadData();
     var user = new User.User();
     user.LoadData();
+
+    //var remind = new Remind.Remind();
+    //remind.Run();
     //var userVM = function () { }
     //userVM.prototype.LoadData = function () {
     //    $.get("/User/GetData", function (data) {

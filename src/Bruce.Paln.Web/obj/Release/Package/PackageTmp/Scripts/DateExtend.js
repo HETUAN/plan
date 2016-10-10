@@ -1,7 +1,7 @@
 define([], function () {
 
     // 对当前日期的年进行增加或减少
-    Date.prototype.addYear = function (year) {
+    Date.prototype.AddYear = function (year) {
         var curYear = this.getFullYear();
         if (year == null)
             return
@@ -58,7 +58,7 @@ define([], function () {
     }
 
     // 对当前日期的豪秒进行增加或减少
-    Date.prototype.AddSeconds = function (Milliseconds) {
+    Date.prototype.AddMilliseconds = function (Milliseconds) {
         var curMilliseconds = this.getTime();
         this.setTime(curMilliseconds + Milliseconds);
         return this;
@@ -76,6 +76,11 @@ define([], function () {
             result = this.getTime() - d.getTime();
         }
         return result;
+    }
+
+    //将两个时间相减返回毫秒数
+    Date.prototype.SubToMilliseconds = function (date) {
+        return this.getTime() - date.getTime();
     }
 
     // 对Date的扩展，将 Date 转化为指定格式的String
@@ -100,9 +105,14 @@ define([], function () {
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+
+    var TransferJsonTime = function (Time) {
+        return eval(Time.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))
+    }
     //return an object to define the "my/shirt" module.
     return {
-        Date: Date
+        Date: Date,
+        TransferJsonTime: TransferJsonTime
     }
 }
 );
