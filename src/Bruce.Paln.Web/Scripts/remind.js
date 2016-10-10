@@ -7,11 +7,12 @@
 });
 define(['jquery', 'DateExtend'], function ($, DateExtend) {
     var Remind = function () {
+        this.Interval = null;
         this.RemindList = [];
         this.audio = document.createElement("audio");
         this.audio.src = "../Scripts/ring.mp3";
     }
-    Remind.prototype.StartRemind = function (plan,callback) {
+    Remind.prototype.StartRemind = function (plan) {
         //此处应该使用将数据处理成提醒的时间点和信息的数组，然后每隔x毫秒遍历一遍看是否有到达时间的项，有则响铃并将数据移除。
         this.ClearTimeOut();
         if (plan == null) return;
@@ -26,17 +27,24 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
                 //开始时间在当前时间之前。
                 var runtime = HappenTime.SubToMilliseconds(curdate);
                 var msg = item.Tag + " --> 任务开始";
-                this.Run(msg, runtime, callback);
+                var m = { type: "start", time: HappenTime.Copy(), msg: msg };
+                this.RemindList.push(m);
+                //this.Run(msg, runtime, callback);
             }
 
             if (HappenTime.AddMinute(item.UseTime).Compare(curdate) > 0) {
                 //结束时间在当前时间之前。
                 var runtime = HappenTime.SubToMilliseconds(curdate);
                 var msg = item.Tag + " --> 任务结束";
-                this.Run(msg, runtime, callback);
+                var m = { type: "stop", time: HappenTime.Copy(), msg: msg };
+                this.RemindList.push(m);
+                //this.Run(msg, runtime, callback);
             }
+            //console.log(this.RemindList);
         }
-        console.log(this.RemindList);
+        //console.log(this.RemindList);
+        //console.log("-------------------");
+        this.Run();
     }
 
     Remind.prototype.ClearTimeOut = function () {
@@ -50,23 +58,53 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
 
     Remind.prototype.Run = function (msg, milliseconds, callback) {
         //播放音乐
-        console.log(callback);
-        var r = setTimeout(function () { var r = new Remind(); r.PlayMusic(msg, callback); }, milliseconds);
-        this.RemindList.push(r);
+        clearInterval(this.Interval);
+        this.Interval = setInterval(function () {
+            console.log(arguments);
+            var list = arguments[0];
+            var i = 0;
+            for (i in list) {
+                console.log(list[i]);
+                var curdate = new Date();
+                if (list[i].time.Compare(curdate) < 0) {
+                    var r = new Remind();
+                    r.PlayMusic(list[i].msg);
+                    list.splice(i, 1);
+                    break;
+                }
+            }
+            console.log(list);
+        }, 500, this.RemindList);
+        
+        //console.log(callback);
+        //var r = setTimeout(function () { var r = new Remind(); r.PlayMusic(msg, callback); }, milliseconds);
+        //this.RemindList.push(r);
     }
 
-    Remind.prototype.PlayMusic = function (msg, callback) {
+    Remind.prototype.PlayMusic = function (msg) {
         //
-        console.log(callback);
+        //console.log("Play Music!");
         this.audio.play();
-        setTimeout(function () { new Remind().Alert(msg, callback); }, 500);
+        setTimeout(function () { new Remind().Alert(msg); }, 1000);
     }
 
-    Remind.prototype.Alert = function (msg, callback) {
+    Remind.prototype.Alert = function (msg) {
         alert(msg);
-        console.log(callback);
-        callback || callback();
     }
 
+    Remind.prototype.Recycle = function () {
+        var list = arguments[0];
+        var i = 0;
+        for (i in list) {
+            console.log(list[i]);
+            var curdate = new Date();
+            if (list[i].time.Compare(curdate) > 0) {
+                var r = new Remind();
+                r.PlayMusic(list[i].msg);
+                break;
+            }
+        }
+        list.splice(i, 1);
+    }
     return { Remind: Remind }
 });

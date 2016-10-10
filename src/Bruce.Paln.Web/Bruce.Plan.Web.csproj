@@ -114,11 +114,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\remind1.js" />
+    <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\note.js" />
     <Content Include="Scripts\plan.js" />
-    <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
     <Content Include="Scripts\ring.mp3" />

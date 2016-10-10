@@ -137,7 +137,8 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 var plan = $("#plan");
                 //console.log(plan.text());
                 plan.empty();
-                plan.append(TransferJsonToHtml(data));
+                var p = new planVM();
+                plan.append(p.TransferJsonToHtml(data));
 
                 //设置提醒
                 var r = new Remind.Remind();

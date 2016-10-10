@@ -10,7 +10,6 @@
         Daily: '../Scripts/daily',
         Note: '../Scripts/note',
         Remind: '../Scripts/remind',
-        Remind1: '../Scripts/remind1',
         //jqueryui: '../Scripts/datetime/jquery-ui-1.10.4.custom.min.js',
         //jqueryuidatepickerCN: '../Scripts/datetime/jquery.ui.datepicker-zh-CN.js',
         //jqueryuitimepacker: '../Scripts/datetime/jquery-ui-timepicker-addon.js',
@@ -23,7 +22,7 @@
     }
 });
 
-define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind', 'Remind1'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind, Remind1) {
+define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind) {
     //console.log($);
     var $ = jQuery;
     var planVM = function () { }
@@ -55,10 +54,8 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 p.TransferJsonToHtml(data);
 
                 //设置提醒
-                //var r = new Remind.Remind();
-                //r.StartRemind(data, null);
-                var r1 = new Remind1.Remind();
-                r1.StartRemind(data);
+                var r = new Remind.Remind();
+                r.StartRemind(data);
 
                 p.ReBindDeleteAndEditEvent();
             } else {
@@ -144,10 +141,8 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 plan.append(p.TransferJsonToHtml(data));
 
                 //设置提醒
-                //var r = new Remind.Remind();
-                //r.StartRemind(data, null);
-                var r1 = new Remind1.Remind();
-                r1.StartRemind(data);
+                var r = new Remind.Remind();
+                r.StartRemind(data);
 
                 new planVM().ReBindDeleteAndEditEvent();
             } else {
