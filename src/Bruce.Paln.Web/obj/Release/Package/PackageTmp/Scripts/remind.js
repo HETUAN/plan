@@ -3,9 +3,10 @@
     paths: {
         jquery: '../Scripts/jquery-2.1.1.min',
         DateExtend: '../Scripts/DateExtend',
+        Plan: '../Scripts/plan',
     }
 });
-define(['jquery', 'DateExtend'], function ($, DateExtend) {
+define(['jquery', 'DateExtend', 'Plan'], function ($, DateExtend, Plan) {
     var Remind = function () {
         this.Interval = null;
         this.RemindList = [];
@@ -70,9 +71,16 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
                     var r = new Remind();
                     r.PlayMusic(list[i].msg);
                     list.splice(i, 1);
+                    if (Plan == null)
+                    {
+                        Plan = require("Plan");
+                    }
+                    var p = new Plan.planVM();
+                    p.ReloadData();
                     break;
                 }
             }
+            //console.log(Plan);
             //console.log(list);
         }, 500, this.RemindList);
         
@@ -101,9 +109,15 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
             if (list[i].time.Compare(curdate) > 0) {
                 var r = new Remind();
                 r.PlayMusic(list[i].msg);
+                //var p = new require("plan").PlanVM();
+                //p.ReloadData();
+                console.log(list[i].msg);
+                var p = new Plan.PlanVM();
+                p.ReloadData();
                 break;
             }
         }
+        console.log("---");
         list.splice(i, 1);
     }
     return { Remind: Remind }

@@ -415,7 +415,7 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
                                        '    <div class="form-group">' +
                                        '        <label for="NoteAddSummary" class="col-sm-2 control-label">详细说明</label>' +
                                        '        <div class="col-sm-10">' +
-                                       '            <textarea class="form-control" id="NoteAddSummary" rows="3"> ' + model.Note + '</textarea>' +
+                                       '            <textarea class="form-control" id="NoteAddSummary" rows="9"> ' + model.Note + '</textarea>' +
                                        '        </div>' +
                                        '    </div>' +
                                        //'    <div class="form-group">' +
