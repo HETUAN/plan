@@ -60,11 +60,11 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
         //播放音乐
         clearInterval(this.Interval);
         this.Interval = setInterval(function () {
-            console.log(arguments);
+            //console.log(arguments);
             var list = arguments[0];
             var i = 0;
             for (i in list) {
-                console.log(list[i]);
+                //console.log(list[i]);
                 var curdate = new Date();
                 if (list[i].time.Compare(curdate) < 0) {
                     var r = new Remind();
@@ -73,7 +73,7 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
                     break;
                 }
             }
-            console.log(list);
+            //console.log(list);
         }, 500, this.RemindList);
         
         //console.log(callback);
@@ -96,7 +96,7 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
         var list = arguments[0];
         var i = 0;
         for (i in list) {
-            console.log(list[i]);
+            //console.log(list[i]);
             var curdate = new Date();
             if (list[i].time.Compare(curdate) > 0) {
                 var r = new Remind();
