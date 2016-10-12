@@ -11,6 +11,7 @@
         Note: '../Scripts/note',
         Remind: '../Scripts/remind',
         Plan: '../Scripts/plan',
+        Weather: '../Scripts/weather',
         //jqueryui: '../Scripts/datetime/jquery-ui-1.10.4.custom.min.js',
         //jqueryuidatepickerCN: '../Scripts/datetime/jquery.ui.datepicker-zh-CN.js',
         //jqueryuitimepacker: '../Scripts/datetime/jquery-ui-timepicker-addon.js',
@@ -23,7 +24,7 @@
     }
 });
 
-define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind', 'Plan'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind, Plan) {
+define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind', 'Plan', 'Weather'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind, Plan, Weather) {
     //console.log($);
     var $ = jQuery;
 
@@ -42,6 +43,8 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     //User.LoadData();
     var user = new User.User();
     user.LoadData();
+    //var w = new Weather.Weather();
+    //w.Init();
 
     //var remind = new Remind.Remind();
     //remind.Run();

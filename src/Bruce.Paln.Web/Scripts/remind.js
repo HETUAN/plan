@@ -25,7 +25,7 @@ define(['jquery', 'DateExtend', 'Plan'], function ($, DateExtend, Plan) {
         var idx = 0;
         var len = plan.length;
         this.RemindList = [];
-        console.log(this.RemindList);
+        //console.log(this.RemindList);
         //this.RemindList.length = 0;
         for (; idx < len; idx++) {
             //[{"Id":26,"UserId":12,"Importance":1,"Tag":"测试声音","Detail":"测试声音","IsRemind":1,"PerRemind":1,"perRemindTime":10,"HappenTime":"\/Date(1476011400000)\/","UseTime":30,"HappenYear":2016,"HappenMonth":10,"HappenDay":9,"HappenHour":19,"HappenMinute":10,"CreateTime":"\/Date(1476011379857)\/","UpdateTime":"\/Date(1476011379857)\/","Result":0,"Summary":null}]
@@ -88,7 +88,7 @@ define(['jquery', 'DateExtend', 'Plan'], function ($, DateExtend, Plan) {
                 }
             }
             //console.log(Plan);
-            console.log(list);
+            //console.log(list);
         }, 500, this.RemindList);
 
         //console.log(callback);
@@ -118,13 +118,13 @@ define(['jquery', 'DateExtend', 'Plan'], function ($, DateExtend, Plan) {
                 r.PlayMusic(list[i].msg);
                 //var p = new require("plan").PlanVM();
                 //p.ReloadData();
-                console.log(list[i].msg);
+                //console.log(list[i].msg);
                 var p = new Plan.PlanVM();
                 p.ReloadData();
                 break;
             }
         }
-        console.log("---");
+        //console.log("---");
         list.splice(i, 1);
     }
 
@@ -192,7 +192,7 @@ define(['jquery', 'DateExtend', 'Plan'], function ($, DateExtend, Plan) {
                     }
                 }
                 //console.log(Plan);
-                console.log(list);
+                //console.log(list);
             }, 500, this.RemindList);
         },
         PlayMusic: function (msg) {
