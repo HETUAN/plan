@@ -27,7 +27,7 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     //console.log($);
     var $ = jQuery;
 
-    var p = new Plan.planVM();
+    var p = new Plan.planVM(); 
     p.LoadData();
     p.BindTypeEvnet();
     $('#datetimepicker1').datetimepicker({

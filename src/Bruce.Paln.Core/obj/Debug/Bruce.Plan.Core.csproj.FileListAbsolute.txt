@@ -1,5 +1,0 @@
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.dll
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Debug\Bruce.Paln.Core.pdb
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.dll
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Paln.Core.pdb
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Debug\Bruce.Plan.Core.csprojResolveAssemblyReference.cache

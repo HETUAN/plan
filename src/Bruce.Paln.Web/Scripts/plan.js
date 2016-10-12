@@ -25,12 +25,36 @@
 define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind) {
     //console.log($);
     var $ = jQuery;
-    var planVM = function () { }
-
-    //初始化界面
-    planVM.prototype.Init = function () {
-        //
+    var planVM = function () {
+        //this.remind = null;
+        //if (Remind == null) {
+        //    Remind = require("Remind");
+        //    //console.log(Remind);
+        //    this.remind = Remind.Remind();
+        //    //r.StartRemind(data);
+        //} else {
+        //    this.remind = Remind.Remind();
+        //}
+        //console.log(this.remind);
     }
+
+    planVM.prototype.remind = null;
+    //planVM.prototype.Init = function () {
+    //    if (Remind == null) {
+    //        Remind = require("Remind"); 
+    //        planVM.prototype.remind = new Remind.Remind(); 
+    //    } else {
+    //        planVM.prototype.remind = new Remind.Remind();
+    //    } 
+    //    //初始化界面
+    //    planVM.prototype.Init = function () {
+    //        //
+    //    }
+    //}
+
+    //planVM.prototype.test = function (msg) {
+    //    this.remind.Alert(msg);
+    //}
 
     //var RR = require("../Scripts/remind");
     //console.log(RR);
@@ -56,18 +80,25 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 p.TransferJsonToHtml(data);
 
                 //设置提醒
+                //if (Remind == null) {
+                //    Remind = require("Remind");
+                //    //console.log(Remind);
+                //    var r = new Remind.Remind();
+                //    r.StartRemind(data);
+                //} else {
+                //    var r = new Remind.Remind();
+                //    r.StartRemind(data);
+                //}
+                //var r = new require("../Scripts/remind").Remind();
+                //r.StartRemind(data);   
                 if (Remind == null) {
                     Remind = require("Remind");
-                    //console.log(Remind);
-                    var r = new Remind.Remind();
-                    r.StartRemind(data);
+                    console.log(Remind);
+                    Remind.Remind.StartRemind(data);
                 } else {
-                    var r = new Remind.Remind();
-                    r.StartRemind(data);
+                    console.log(Remind);
+                    Remind.Remind.StartRemind(data);
                 }
-                //var r = new require("../Scripts/remind").Remind();
-                //r.StartRemind(data);
-
                 p.ReBindDeleteAndEditEvent();
             } else {
                 console.log("error");
@@ -152,17 +183,23 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
                 plan.append(p.TransferJsonToHtml(data));
 
                 //设置提醒
-                if (Remind == null) {
-                    Remind = require("Remind");
-                    console.log(Remind);
-                    var r = new Remind.Remind();
-                    r.StartRemind(data);
-                } else {
-                    var r = new Remind.Remind();
-                    r.StartRemind(data);
-                }
+                //if (Remind == null) {
+                //    Remind = require("Remind");
+                //    console.log(Remind);
+                //    var r = new Remind.Remind();
+                //    r.StartRemind(data);
+                //} else {
+                //    var r = new Remind.Remind();
+                //    r.StartRemind(data);
+                //}
                 //var r = new require("../Scripts/remind").Remind();
                 //r.StartRemind(data);
+                if (Remind == null) {
+                    Remind = require("Remind");
+                    Remind.Remind.StartRemind(data);
+                } else {
+                    Remind.Remind.StartRemind(data);
+                }
 
                 new planVM().ReBindDeleteAndEditEvent();
             } else {
@@ -498,6 +535,7 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
         //    alert('嘿，我听说您喜欢模态框...');
         //})
     }
+
 
     /*
     var p = new planVM();
