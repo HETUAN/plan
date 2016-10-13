@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bruce.Paln.Web.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,8 @@ namespace Bruce.Paln.Web.Filters
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            var user = HttpContext.Current.Session["UserID"];
-            if (user == null)
+            var user = Account.UserId;// HttpContext.Current.Session["UserID"];
+            if (user == 0)
             {
                 filterContext.Result = new RedirectResult("/User/Index");
             }

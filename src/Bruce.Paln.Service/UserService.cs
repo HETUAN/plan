@@ -25,5 +25,10 @@ namespace Bruce.Paln.Service
         {
             return _repository.GetViewModel(userName, passWord);
         }
+
+        public int UserExist(int id, string passWord)
+        {
+            return _repository.UserExist(id, passWord);
+        }
     }
 }

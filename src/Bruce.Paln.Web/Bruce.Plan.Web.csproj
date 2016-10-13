@@ -162,6 +162,10 @@
     <Folder Include="Views\Note\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bruce.Paln.Core\Bruce.Plan.Core.csproj">
+      <Project>{26ccc3a2-32aa-45e8-894c-4b03d468a1b7}</Project>
+      <Name>Bruce.Plan.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bruce.Paln.Entity\Bruce.Plan.Entity.csproj">
       <Project>{03544f78-fa8b-42c3-bd19-d2b86d76d267}</Project>
       <Name>Bruce.Plan.Entity</Name>

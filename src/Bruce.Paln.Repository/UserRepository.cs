@@ -21,6 +21,14 @@ namespace Bruce.Paln.Repository
             return QuerySingle<UserViewModel>(OpenMsSqlConnection(), sql, new { UserName = userName, PassWord = passWord });
         }
 
+        public int UserExist(int id, string passWord)
+        {
+            //
+            string sql = @"SELECT COUNT(UserID)
+                          FROM [Users] WHERE UserID = @UserID AND PassWord = @PassWord";
+            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { UserID = id, PassWord = passWord });
+        }
+
         public UserViewModel GetViewModel(int UserID)
         {
             //

@@ -31,3 +31,5 @@ E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\bin\zh-Hans\System.Web.Mvc.resources
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\obj\Debug\Bruce.Plan.Web.csprojResolveAssemblyReference.cache
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\obj\Debug\Bruce.Paln.Web.dll
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\obj\Debug\Bruce.Paln.Web.pdb
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\bin\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Web\bin\Bruce.Paln.Core.pdb

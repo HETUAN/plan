@@ -15,7 +15,8 @@ namespace Bruce.Paln.Web.Controllers
         // GET: /User/
         public ActionResult Index()
         {
-            if (HttpContext.Session["UserID"] != null)
+            
+            if (Account.CheckUser())
                 return RedirectToAction("Home", "Home");
             return View();
         }
@@ -25,12 +26,14 @@ namespace Bruce.Paln.Web.Controllers
         {
             //
             UserService _service = new UserService();
-            var result = _service.GetViewModel(model.UserName, model.PassWord);
+            string Pwd = Bruce.Paln.Core.MD5Helper.GetMD5(model.PassWord);
+            var result = _service.GetViewModel(model.UserName, Pwd);
             if (result != null)
             {
                 //HttpContext.Session.Add("UserID", result.UserID);
                 //HttpContext.Session.Timeout = 500;
-                Account.UserId = result.UserID;
+                //Account.UserId = result.UserID;
+                Account.SerUser(result.UserID, Pwd);
                 return RedirectToAction("Home", "Home");
             }
             return View(model);
@@ -38,22 +41,22 @@ namespace Bruce.Paln.Web.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Response.Cookies.Clear();
             return RedirectToAction("Home", "Home");
         }
 
         [HttpGet]
         public JsonResult GetModel()
         {
-            if (HttpContext.Session["UserID"] == null)
+            if (Account.UserId == 0)
             {
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                int UserID = (int)HttpContext.Session["UserID"];
+                //int UserID = Account.UserId;
                 UserService uService = new UserService();
-                return Json(uService.GetViewModel(UserID), JsonRequestBehavior.AllowGet);
+                return Json(uService.GetViewModel(Account.UserId), JsonRequestBehavior.AllowGet);
             }
         }
     }
