@@ -14,8 +14,8 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" /><!--时间选择控件-->
     <link href="~/Content/prettify-1.0.css" rel="stylesheet" /><!--时间选择控件-->
+    <script src="http://wgeo.weather.com.cn/ip/?_=1476241656585" type="text/javascript"></script>
     <script src="~/Scripts/require.js" data-main="../Scripts/main"></script>
-    @*<script src="http://wgeo.weather.com.cn/ip/?_=1476241656585" type="text/javascript"></script>*@
 </head>
 <body>
 
@@ -90,7 +90,13 @@
     <div class="container-fluid">
         <div id="plan">
         </div>
-    </div><div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="weather" style=" cursor:pointer;position: absolute; bottom: 0px; right: 0px; width: 200px; height: 50px; border:2px solid gray; opacity: 1; border-radius: 10px;">
+            <div style="float:left"><img height="50" id="weatherpic" src="http://www.duba.com/static/v2/images/weather/a/a1.png" /></div>
+            <div id="weatherinstr" style="height: 50px; vertical-align: middle; line-height:45px; ">北京 晴 15～20℃</div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

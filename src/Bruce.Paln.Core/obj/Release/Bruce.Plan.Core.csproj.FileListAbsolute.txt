@@ -1,0 +1,4 @@
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Release\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\bin\Release\Bruce.Paln.Core.pdb
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Release\Bruce.Paln.Core.dll
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Paln.Core\obj\Release\Bruce.Paln.Core.pdb
