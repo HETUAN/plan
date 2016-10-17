@@ -20,7 +20,7 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
 
     });
     Weather.prototype.Init = function (id) {
-        if (this.id != null)
+        if (id != 0 && this.id != null)
             this.id = id;
         this.LoadWeather();
     }
@@ -54,21 +54,14 @@ define(['jquery', 'DateExtend'], function ($, DateExtend) {
         var intro = data.city + " " + data.weather1 + " " + data.temp1 + " " + data['pm-level'];
         var instroNode = $("#weatherinstr");
         var imgNode = $("#weatherpic");
-        //console.log(instroNode);
-        //console.log(instroNode.first().text());
-        //console.log(imgNode);
-        //console.log(imgNode.first().attr("src"));
         instroNode.html("&nbsp;&nbsp;&nbsp;" + intro);
         imgNode.attr("src", "http://www.duba.com/static/v2/images/weather/a/a" + data.st1 + ".png");
-
-
-
         $("#weather").onclick = function () {
             //$("#hidenweather").show();
         };
-       
-        
-      
+
+        //每小时更新天气
+        setTimeout(function () { var w = new Weather(); w.Init(id) }, 360000);
     }
 
 
