@@ -445,5 +445,31 @@ define(['jquery', 'bootstrap', 'moment', 'datetimepicker', 'DateExtend'], functi
         return node;
     }
 
+    Note.prototype.CreateLatestNote = function () {
+        //
+        $.get("/Note/GetLastModel?" + (new Date()).getMilliseconds(), function (data) {
+            if (data != null) {
+                //
+                var html = $('<p>' + data.Note + '</p>');
+                var node = $("#lastNote");
+                //node.title = data.Title;
+                //node["data-content"] = ("<p>" + data.Title + "</p>");
+                node.attr("title", data.Title);
+                node.attr("data-content", "<p>" + data.Note + "</p>");
+                node.popover({ html: true });
+                node.on('show.bs.popover', function () {
+                    //
+                    $.get("/Note/GetLastModel?" + (new Date()).getMilliseconds(), function (data) {
+                        if (data != null) {
+                            var n = $("#lastNote");
+                            n.attr("title", data.Title);
+                            n.attr("data-content", "<p>" + data.Note + "</p>");
+                        }
+                    });
+                });
+            }
+        });
+    }
+
     return { Note: Note }
 });

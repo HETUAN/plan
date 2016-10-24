@@ -23,6 +23,11 @@ namespace Bruce.Paln.Service
             return _repository.GetModel(Id);
         }
 
+        public NoteEntity GetLastMode()
+        {
+            return _repository.GetLastModel();
+        }
+
         public List<NoteViewModel> GetList(int UserId)
         {
             return _repository.GetList(UserId);

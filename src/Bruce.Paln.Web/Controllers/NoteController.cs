@@ -25,6 +25,11 @@ namespace Bruce.Paln.Web.Controllers
             return View();
         }
 
+        public JsonResult GetLastModel()
+        {
+            return Json(_service.GetLastMode(), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetModel(int id)
         {
             if (id == 0)

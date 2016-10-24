@@ -24,6 +24,17 @@ namespace Bruce.Paln.Repository
             return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
         }
 
+        public NoteEntity GetLastModel()
+        {
+            string sql = @"SELECT TOP 1 [Id]
+                                ,[UserId]
+                                ,[Title]
+                                ,[Note]
+                                ,[CreateTime]
+                                ,[UpdateTime]
+                            FROM [Note] ORDER BY Id DESC";
+            return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql);
+        }
         public List<NoteViewModel> GetList(int UserId)
         {
             string sql = @"SELECT [Id]

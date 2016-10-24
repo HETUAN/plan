@@ -453,6 +453,13 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
             note.NoteAdd();
         }
 
+        // 添加日记模态提交事件
+        $("#addDailySummary")[0].onclick = function () {
+            console.log("DailyAdd");
+            var daily = new Daily.Daily();
+            daily.DailyAdd();
+        }
+
     }
 
     planVM.prototype.BindViewDate = function (type) {

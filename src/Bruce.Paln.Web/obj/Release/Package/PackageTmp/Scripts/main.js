@@ -28,7 +28,7 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     //console.log($);
     var $ = jQuery;
 
-    var p = new Plan.planVM(); 
+    var p = new Plan.planVM();
     p.LoadData();
     p.BindTypeEvnet();
     $('#datetimepicker1').datetimepicker({
@@ -43,8 +43,10 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
     //User.LoadData();
     var user = new User.User();
     user.LoadData();
-    //var w = new Weather.Weather();
-    //w.Init();
+    var w = new Weather.Weather();
+    $(function () {
+        w.Init(id);
+    });
 
     //var remind = new Remind.Remind();
     //remind.Run();

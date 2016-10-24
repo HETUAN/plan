@@ -48,6 +48,9 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
         w.Init(id);
     });
 
+    var note = new Note.Note();
+    note.CreateLatestNote();
+
     //var remind = new Remind.Remind();
     //remind.Run();
     //var userVM = function () { }
