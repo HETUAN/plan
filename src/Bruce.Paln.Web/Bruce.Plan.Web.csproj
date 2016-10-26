@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeetCodeController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\UserBaseAuthorizeAttribute.cs" />
@@ -138,6 +139,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Account.cs" />
+    <Compile Include="Helper\LeetCodeHelper.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +151,8 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Scripts\learn\jx.base.js" />
+    <Content Include="StaticData\LeetCodeList.json" />
+    <Content Include="Views\LeetCode\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

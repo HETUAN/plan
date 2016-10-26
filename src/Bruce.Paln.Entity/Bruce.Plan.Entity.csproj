@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DailyEntity.cs" />
+    <Compile Include="LeetCode\LeetCodeEntity.cs" />
     <Compile Include="NoteEntity.cs" />
     <Compile Include="PlanResultEntity.cs" />
     <Compile Include="UserPlanEntity.cs" />
