@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DailyService.cs" />
+    <Compile Include="LeetAnswerService.cs" />
+    <Compile Include="LeetQuestionService.cs" />
     <Compile Include="NoteService.cs" />
     <Compile Include="PlanResultService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>

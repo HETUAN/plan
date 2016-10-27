@@ -3,9 +3,6 @@ using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Service
 {
@@ -18,14 +15,14 @@ namespace Bruce.Paln.Service
         }
 
 
-        public WeeklyEntity GetMode(int UserId, DateTime Date)
+        public WeeklyEntity GetMode(int userId, DateTime date)
         {
-            return _repository.GetModel(UserId, Date);
+            return _repository.GetModel(userId, date);
         }
 
-        public List<WeeklyViewModel> GetList(int UserId)
+        public List<WeeklyViewModel> GetList(int userId)
         {
-            return _repository.GetList(UserId);
+            return _repository.GetList(userId);
         }
 
         public int Insert(WeeklyEntity model)

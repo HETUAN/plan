@@ -1,9 +1,4 @@
 ﻿using Bruce.Paln.Entity.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Repository
 {
@@ -29,7 +24,7 @@ namespace Bruce.Paln.Repository
             return QuerySingle<int>(OpenMsSqlConnection(), sql, new { UserID = id, PassWord = passWord });
         }
 
-        public UserViewModel GetViewModel(int UserID)
+        public UserViewModel GetViewModel(int userId)
         {
             //
             string sql = @"SELECT [UserID] 
@@ -38,7 +33,7 @@ namespace Bruce.Paln.Repository
                               ,[Sex] 
                               ,[Email] 
                           FROM [Users] WHERE UserID = @UserID";
-            return QuerySingle<UserViewModel>(OpenMsSqlConnection(), sql, new { UserID = UserID });
+            return QuerySingle<UserViewModel>(OpenMsSqlConnection(), sql, new { UserID = userId });
         }
     }
 }

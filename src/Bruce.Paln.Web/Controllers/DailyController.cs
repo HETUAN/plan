@@ -2,16 +2,13 @@
 using Bruce.Paln.Service;
 using Bruce.Paln.Web.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Bruce.Paln.Web.Controllers
 {
     public class DailyController : Controller
     {
-        private DailyService _service;
+        private readonly DailyService _service;
 
         /// <summary>
         /// 需求分析：
@@ -23,12 +20,6 @@ namespace Bruce.Paln.Web.Controllers
         public DailyController()
         {
             _service = new DailyService();
-        }
-        //
-        // GET: /Daily/
-        public ActionResult Index()
-        {
-            return View();
         }
 
         public ActionResult GetModel(int id)
@@ -53,11 +44,11 @@ namespace Bruce.Paln.Web.Controllers
         {
             return Json(_service.GetList(Account.UserId), JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult GetListPager(int pageindex, int pageSize, string title, string date)
         {
             DateTime? dt = null;
-            int rows = 0;
+            int rows;
             if (date != "")
                 dt = Convert.ToDateTime(date);
             var list = _service.GetList(Account.UserId, pageindex, pageSize, title, dt, out rows);

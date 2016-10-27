@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bruce.Paln.Entity;
 using Bruce.Paln.Entity.ViewModel;
 using Dapper;
@@ -11,7 +9,7 @@ namespace Bruce.Paln.Repository
 {
     public class DailyRepository : BaseRepository
     {
-        public DailyEntity GetModel(int UserId, DateTime Date)
+        public DailyEntity GetModel(int userId, DateTime date)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
@@ -21,10 +19,10 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId AND DailyDate = @DailyDate";
-            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { UserId = UserId, DailyDate = Date.Date });
+            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, DailyDate = date.Date });
         }
 
-        public DailyEntity GetModel(int Id)
+        public DailyEntity GetModel(int id)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
@@ -34,10 +32,10 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE Id = @Id";
-            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { Id = id });
         }
 
-        public List<DailyViewModel> GetList(int UserId)
+        public List<DailyViewModel> GetList(int userId)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
@@ -46,7 +44,7 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<DailyViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<DailyViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
         }
 
         public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, DateTime? date, out int rows)

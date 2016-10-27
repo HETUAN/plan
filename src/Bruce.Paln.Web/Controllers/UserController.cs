@@ -1,10 +1,6 @@
 ﻿using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Service;
 using Bruce.Paln.Web.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Bruce.Paln.Web.Controllers
@@ -15,7 +11,7 @@ namespace Bruce.Paln.Web.Controllers
         // GET: /User/
         public ActionResult Index()
         {
-            
+
             if (Account.CheckUser())
                 return RedirectToAction("Home", "Home");
             return View();
@@ -25,15 +21,15 @@ namespace Bruce.Paln.Web.Controllers
         public ActionResult Index(LoginViewModel model)
         {
             //
-            UserService _service = new UserService();
-            string Pwd = Bruce.Paln.Core.MD5Helper.GetMD5(model.PassWord);
-            var result = _service.GetViewModel(model.UserName, Pwd);
+            UserService service = new UserService();
+            string pwd = Core.MD5Helper.GetMD5(model.PassWord);
+            var result = service.GetViewModel(model.UserName, pwd);
             if (result != null)
             {
                 //HttpContext.Session.Add("UserID", result.UserID);
                 //HttpContext.Session.Timeout = 500;
                 //Account.UserId = result.UserID;
-                Account.SerUser(result.UserID, Pwd);
+                Account.SerUser(result.UserID, pwd);
                 return RedirectToAction("Home", "Home");
             }
             return View(model);

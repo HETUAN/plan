@@ -3,9 +3,6 @@ using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Service
 {
@@ -18,9 +15,9 @@ namespace Bruce.Paln.Service
         }
 
 
-        public DailyEntity GetModel(int UserId, DateTime Date)
+        public DailyEntity GetModel(int userId, DateTime date)
         {
-            return _repository.GetModel(UserId, Date);
+            return _repository.GetModel(userId, date);
         }
 
         public DailyEntity GetModel(int id)
@@ -28,9 +25,9 @@ namespace Bruce.Paln.Service
             return _repository.GetModel(id);
         }
 
-        public List<DailyViewModel> GetList(int UserId)
+        public List<DailyViewModel> GetList(int userId)
         {
-            return _repository.GetList(UserId);
+            return _repository.GetList(userId);
         }
 
         public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, DateTime? date, out int rows)

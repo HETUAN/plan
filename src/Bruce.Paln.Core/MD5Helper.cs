@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace Bruce.Paln.Core
@@ -12,7 +9,7 @@ namespace Bruce.Paln.Core
         //新加的MD5小写
         public static string GetMD5(string str)
         {
-            string convertStr = null;
+            string convertStr;
             MD5 md5 = MD5.Create();//实例化一个MD5对象，也可以这样：  
             byte[] value = UTF8Encoding.Default.GetBytes(str);
             byte[] data = md5.ComputeHash(value);//使用十六进制类型格式  

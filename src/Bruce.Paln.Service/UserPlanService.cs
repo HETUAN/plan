@@ -3,9 +3,6 @@ using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Service
 {
@@ -37,9 +34,9 @@ namespace Bruce.Paln.Service
             return _repository.Delete(entityId);
         }
 
-        public UserPlanEntity GetModel(int Id)
+        public UserPlanEntity GetModel(int id)
         {
-            return _repository.GetModel(Id);
+            return _repository.GetModel(id);
         }
         public List<UserPlanEntity> GetList()
         {

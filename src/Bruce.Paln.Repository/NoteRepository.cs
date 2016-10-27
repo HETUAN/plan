@@ -1,10 +1,7 @@
 ﻿using Bruce.Paln.Entity;
 using Bruce.Paln.Entity.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 
 namespace Bruce.Paln.Repository
@@ -12,7 +9,7 @@ namespace Bruce.Paln.Repository
     public class NoteRepository : BaseRepository
     {
 
-        public NoteEntity GetModel(int Id)
+        public NoteEntity GetModel(int id)
         {
             string sql = @"SELECT [Id]
                                 ,[UserId]
@@ -21,7 +18,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                             FROM [Note] WHERE Id = @Id";
-            return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+            return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = id });
         }
 
         public NoteEntity GetLastModel()
@@ -35,7 +32,7 @@ namespace Bruce.Paln.Repository
                             FROM [Note] ORDER BY Id DESC";
             return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql);
         }
-        public List<NoteViewModel> GetList(int UserId)
+        public List<NoteViewModel> GetList(int userId)
         {
             string sql = @"SELECT [Id]
                                 ,[UserId]
@@ -43,7 +40,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                               FROM [Note] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<NoteViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<NoteViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
         }
 
 

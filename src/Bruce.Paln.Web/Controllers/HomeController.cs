@@ -3,17 +3,14 @@ using Bruce.Paln.Service;
 using Bruce.Paln.Web.Filters;
 using Bruce.Paln.Web.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Bruce.Paln.Web.Controllers
 {
     public class HomeController : Controller
     {
-        UserPlanService upService = new UserPlanService();
-        PlanResultService prService = new PlanResultService();
+        readonly UserPlanService _upService = new UserPlanService();
+        readonly PlanResultService _prService = new PlanResultService();
         //
         // GET: /Home/
         [UserBaseAuthorizeAttribute]
@@ -45,31 +42,25 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult GetData(int type, DateTime? startTime, DateTime? endTime)
         {
-            if (startTime == null)
-                startTime = DateTime.Now.Date;
-            else
-                startTime = startTime.Value.Date;
-            if (endTime == null)
-                endTime = DateTime.Now.Date.AddDays(1);
-            else
-                endTime = endTime.Value.Date.AddDays(1);
+            startTime = startTime == null ? DateTime.Now.Date : startTime.Value.Date;
+            endTime = endTime == null ? DateTime.Now.Date.AddDays(1) : endTime.Value.Date.AddDays(1);
             //var ll = upService.GetVmList().Where(item => item.HappenTime >= startTime.Value.Date && item.HappenTime.Date <= endTime.Value.Date);
-            var ll = upService.GetVmList(Account.UserId, (DateTime)startTime, (DateTime)endTime);
+            var ll = _upService.GetVmList(Account.UserId, (DateTime)startTime, (DateTime)endTime);
             return Json(ll);
         }
 
         /// <summary>
         /// 获取计划实体
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         [UserBaseAuthorizeAttribute]
-        public JsonResult GetModel(int Id)
+        public JsonResult GetModel(int id)
         {
-            if (Id > 0)
+            if (id > 0)
             {
-                return Json(upService.GetModel(Id), JsonRequestBehavior.AllowGet);
+                return Json(_upService.GetModel(id), JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -87,8 +78,8 @@ namespace Bruce.Paln.Web.Controllers
         public JsonResult Add(UserPlanEntity entity)
         {
             entity.UserId = Account.UserId;
-            int id = upService.Insert(entity);
-            var result = new { result = (id > 0 ? true : false) };
+            int id = _upService.Insert(entity);
+            var result = new { result = (id > 0) };
             return Json(result);
         }
 
@@ -102,7 +93,7 @@ namespace Bruce.Paln.Web.Controllers
         public JsonResult Edit(UserPlanEntity entity)
         {
             //entity.UserId = Account.UserId;
-            var id = upService.Update(entity);
+            var id = _upService.Update(entity);
             var result = new { result = id };
             return Json(result);
         }
@@ -110,16 +101,16 @@ namespace Bruce.Paln.Web.Controllers
         /// <summary>
         /// 删除计划
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
         [UserBaseAuthorizeAttribute]
-        public JsonResult Delete(int Id)
+        public JsonResult Delete(int id)
         {
-            if (Id > 0)
+            if (id > 0)
             {
-                int row = upService.Delete(Id);
-                return Json(new { result = row > 0 ? true : false });
+                int row = _upService.Delete(id);
+                return Json(new { result = row > 0 });
             }
             else
             {
@@ -136,12 +127,8 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult AddResult(PlanResultEntity entity)
         {
-            int id = 0;
-            if (prService.ExistResult(entity.PlanId))
-                id = prService.Update(entity);
-            else
-                id = prService.Insert(entity);
-            var result = new { result = (id > 0 ? true : false) };
+            var id = _prService.ExistResult(entity.PlanId) ? _prService.Update(entity) : _prService.Insert(entity);
+            var result = new { result = (id > 0) };
             return Json(result);
         }
 
@@ -154,8 +141,8 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult EditResult(PlanResultEntity entity)
         {
-            int id = prService.Update(entity);
-            var result = new { result = (id > 0 ? true : false) };
+            int id = _prService.Update(entity);
+            var result = new { result = (id > 0) };
             return Json(result);
         }
 
@@ -167,7 +154,7 @@ namespace Bruce.Paln.Web.Controllers
         [UserBaseAuthorizeAttribute]
         public JsonResult GetResultModel(int planId)
         {
-            return Json(prService.GetModel(planId), JsonRequestBehavior.AllowGet);
+            return Json(_prService.GetModel(planId), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -181,7 +168,7 @@ namespace Bruce.Paln.Web.Controllers
         {
             //
             DateTime endTime = startTime.AddMinutes(useTime);
-            int result = upService.CheckConflict(Account.UserId, startTime, endTime);
+            int result = _upService.CheckConflict(Account.UserId, startTime, endTime);
             return Json(new { result = (result > 0) });
         }
     }

@@ -2,9 +2,6 @@
 using Bruce.Paln.Entity.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Repository
 {
@@ -65,7 +62,7 @@ namespace Bruce.Paln.Repository
             return Execute(OpenMsSqlConnection(), sql, entity) > 0;
         }
 
-        public UserPlanEntity GetModel(int Id)
+        public UserPlanEntity GetModel(int id)
         {
             string sql = @"SELECT [Id]
                               ,[UserId]
@@ -80,7 +77,7 @@ namespace Bruce.Paln.Repository
                               ,[CreateTime]
                               ,[UpdateTime]
                           FROM [UserPlan] WHERE Id = @Id";
-            return QuerySingle<UserPlanEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+            return QuerySingle<UserPlanEntity>(OpenMsSqlConnection(), sql, new { Id = id });
         }
 
         /// <summary>

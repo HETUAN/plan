@@ -83,6 +83,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\prettify-1.0.css" />
     <Content Include="DB\Bruce.sql" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.svg" />

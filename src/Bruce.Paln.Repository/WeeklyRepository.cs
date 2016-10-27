@@ -2,9 +2,6 @@
 using Bruce.Paln.Entity.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Repository
 {
@@ -27,7 +24,7 @@ namespace Bruce.Paln.Repository
         }
 
 
-        public WeeklyEntity GetModel(int Id)
+        public WeeklyEntity GetModel(int id)
         {
             //
             string sql = @"SELECT [Id]
@@ -38,10 +35,10 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Weekly] WHERE Id = @Id";
-            return QuerySingle<WeeklyEntity>(OpenMsSqlConnection(), sql, new { Id = Id });
+            return QuerySingle<WeeklyEntity>(OpenMsSqlConnection(), sql, new { Id = id });
         }
 
-        public List<WeeklyViewModel> GetList(int UserId)
+        public List<WeeklyViewModel> GetList(int userId)
         {
             string sql = @"SELECT [Id]
                                   ,[UserId]
@@ -50,7 +47,7 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Weekly] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<WeeklyViewModel>(OpenMsSqlConnection(), sql, new { UserId = UserId });
+            return Query<WeeklyViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
         }
 
         public int Insert(WeeklyEntity model)

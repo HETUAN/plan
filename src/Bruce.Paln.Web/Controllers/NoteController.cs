@@ -2,27 +2,17 @@
 using Bruce.Paln.Service;
 using Bruce.Paln.Web.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Bruce.Paln.Web.Controllers
 {
     public class NoteController : Controller
     {
-        NoteService _service;
+        readonly NoteService _service;
 
         public NoteController()
         {
             _service = new NoteService();
-        }
-
-        //
-        // GET: /Note/
-        public ActionResult Index()
-        {
-            return View();
         }
 
         public JsonResult GetLastModel()
@@ -39,7 +29,7 @@ namespace Bruce.Paln.Web.Controllers
 
         public ActionResult GetListPager(int pageindex, int pageSize, string title)
         {
-            int rows = 0;
+            int rows;
             var list = _service.GetList(Account.UserId, pageindex, pageSize, title, out rows);
             return Json(new { rowCount = rows, curIndex = pageindex, List = list }, JsonRequestBehavior.AllowGet);
         }

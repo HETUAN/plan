@@ -2,13 +2,13 @@
 
 namespace Bruce.Paln.Entity
 {
-    public class WeeklyEntity
+    public class LeetAnswerEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public DateTime WeekDate { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
+        public int LeetCodeId { get; set; }
+        public int Status { get; set; }
+        public string Answer { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
     }

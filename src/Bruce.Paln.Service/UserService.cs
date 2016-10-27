@@ -1,10 +1,5 @@
 ﻿using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Service
 {
@@ -17,9 +12,9 @@ namespace Bruce.Paln.Service
             _repository = new UserRepository();
         }
 
-        public UserViewModel GetViewModel(int UserID)
+        public UserViewModel GetViewModel(int userId)
         {
-            return _repository.GetViewModel(UserID);
+            return _repository.GetViewModel(userId);
         }
         public UserViewModel GetViewModel(string userName, string passWord)
         {

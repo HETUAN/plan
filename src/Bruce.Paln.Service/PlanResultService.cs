@@ -1,24 +1,18 @@
 ﻿using Bruce.Paln.Entity;
 using Bruce.Paln.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Bruce.Paln.Service
 {
     public class PlanResultService
     {
-        public PlanResultRepository _repository;
+        private readonly PlanResultRepository _repository;
 
         public PlanResultService()
         {
             _repository = new PlanResultRepository();
         }
-        public PlanResultEntity GetModel(int Id)
+        public PlanResultEntity GetModel(int id)
         {
-            return _repository.GetModel(Id);
+            return _repository.GetModel(id);
         }
 
         public int Insert(PlanResultEntity model)

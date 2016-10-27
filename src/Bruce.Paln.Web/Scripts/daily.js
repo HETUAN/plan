@@ -5,7 +5,7 @@
         bootstrap: '../Scripts/bootstrap/bootstrap.min',
         moment: '../Scripts/bootstrap/moment-with-locales',
         datetimepicker: '../Scripts/bootstrap/bootstrap-datetimepicker',
-        DateExtend: '../Scripts/DateExtend',
+        DateExtend: '../Scripts/DateExtend'
     },
     shim: {
         "bootstrap": ["jquery"],

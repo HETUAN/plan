@@ -1,7 +1,5 @@
 ﻿using Bruce.Paln.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 
 namespace Bruce.Paln.Web.Helper
@@ -14,7 +12,7 @@ namespace Bruce.Paln.Web.Helper
             {
                 if (HttpContext.Current.Request.Cookies["user"] != null)
                 {
-                    string user = HttpContext.Current.Request.Cookies["user"].Value.ToString();
+                    string user = HttpContext.Current.Request.Cookies["user"].Value;
                     int id = Convert.ToInt32(user.Split(';')[0]);
                     return id;
                 }
@@ -28,8 +26,8 @@ namespace Bruce.Paln.Web.Helper
             {
                 if (HttpContext.Current.Request.Cookies["user"] != null)
                 {
-                    string user = HttpContext.Current.Request.Cookies["user"].Value.ToString();
-                    string pwd = user.Split(';')[1];
+                    string user = HttpContext.Current.Request.Cookies["user"].Value;
+                    var pwd = user.Split(';')[1];
                     return pwd;
                 }
                 return null;
@@ -40,14 +38,14 @@ namespace Bruce.Paln.Web.Helper
         {
             try
             {
-                var json = (id + ";" + passWord).ToString();
+                var json = (id + ";" + passWord);
 
                 var userCookie = new HttpCookie("user", json);
                 userCookie.Expires.AddDays(1);
                 HttpContext.Current.Response.Cookies.Add(userCookie);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -57,7 +55,7 @@ namespace Bruce.Paln.Web.Helper
         {
             if (HttpContext.Current.Request.Cookies["user"] != null)
             {
-                string user = HttpContext.Current.Request.Cookies["user"].Value.ToString();
+                string user = HttpContext.Current.Request.Cookies["user"].Value;
                 int id = Convert.ToInt32(user.Split(';')[0]);
                 string pwd = user.Split(';')[1];
                 UserService uService = new UserService();

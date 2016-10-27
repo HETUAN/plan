@@ -1,11 +1,7 @@
 ﻿using Bruce.Paln.Entity;
 using Bruce.Paln.Entity.ViewModel;
 using Bruce.Paln.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Service
 {
@@ -18,9 +14,9 @@ namespace Bruce.Paln.Service
         }
 
 
-        public NoteEntity GetMode(int Id)
+        public NoteEntity GetMode(int id)
         {
-            return _repository.GetModel(Id);
+            return _repository.GetModel(id);
         }
 
         public NoteEntity GetLastMode()
@@ -28,9 +24,9 @@ namespace Bruce.Paln.Service
             return _repository.GetLastModel();
         }
 
-        public List<NoteViewModel> GetList(int UserId)
+        public List<NoteViewModel> GetList(int userId)
         {
-            return _repository.GetList(UserId);
+            return _repository.GetList(userId);
         }
 
         public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, out int rows)

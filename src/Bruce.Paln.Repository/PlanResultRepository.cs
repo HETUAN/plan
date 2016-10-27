@@ -1,22 +1,17 @@
 ﻿using Bruce.Paln.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bruce.Paln.Repository
 {
     public class PlanResultRepository : BaseRepository
     {
-        public PlanResultEntity GetModel(int Id)
+        public PlanResultEntity GetModel(int id)
         {
             string sql = @"SELECT [Id]
                               ,[PlanId]
                               ,[Result]
                               ,[Summary]
                           FROM [PlanResult] WHERE PlanId = @PlanId";
-            return QuerySingle<PlanResultEntity>(OpenMsSqlConnection(), sql, new { PlanId = Id });
+            return QuerySingle<PlanResultEntity>(OpenMsSqlConnection(), sql, new { PlanId = id });
         }
 
         public int Insert(PlanResultEntity model)
