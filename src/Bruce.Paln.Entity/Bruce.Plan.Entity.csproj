@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DailyEntity.cs" />
+    <Compile Include="KeyCountEntity.cs" />
     <Compile Include="LeetAnswerEntity.cs" />
     <Compile Include="LeetCode\LeetCodeEntity.cs" />
     <Compile Include="LeetQuestionEntity.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="UserPlanEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\DailyViewModel.cs" />
+    <Compile Include="ViewModel\KeyCountViewModel.cs" />
     <Compile Include="ViewModel\LeetQuestionViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NoteViewModel.cs" />

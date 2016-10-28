@@ -115,6 +115,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\leetcode.js" />
     <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\note.js" />
@@ -132,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeyCountController.cs" />
     <Compile Include="Controllers\LeetCodeController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -164,6 +166,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Daily\" />
+    <Folder Include="Views\KeyCount\" />
     <Folder Include="Views\Note\" />
   </ItemGroup>
   <ItemGroup>

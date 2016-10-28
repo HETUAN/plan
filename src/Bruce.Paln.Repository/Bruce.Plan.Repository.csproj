@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
     <Compile Include="DailyRepository.cs" />
+    <Compile Include="KeyCountRepository.cs" />
     <Compile Include="LeetAnswerRepository.cs" />
     <Compile Include="LeetQuestationRepository.cs" />
     <Compile Include="NoteRepository.cs" />
