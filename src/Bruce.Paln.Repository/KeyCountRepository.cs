@@ -19,7 +19,7 @@ namespace Bruce.Paln.Repository
 
         public List<KeyCountViewModel> GetLast7DayViewModels(int userId)
         {
-            string sql = @"SELECT TOP 7 [Day],SUM(KCount) KCount FROM [KeyCount] WHERE UserId = @UserId GROUP BY [Day] DESC";
+            string sql = @"SELECT TOP 7 [Day],SUM(KCount) KCount FROM [KeyCount] WHERE UserId = @UserId GROUP BY [Day] ORDER BY [Day] DESC";
             return Query<KeyCountViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
         }
     }

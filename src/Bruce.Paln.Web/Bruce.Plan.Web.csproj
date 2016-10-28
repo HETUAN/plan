@@ -100,6 +100,8 @@
     <Content Include="Scripts\bootstrap\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\moment-with-locales.js" />
+    <Content Include="Scripts\charts\echarts.min.js" />
+    <Content Include="Scripts\charts\echarts.simple.min.js" />
     <Content Include="Scripts\daily.js" />
     <Content Include="Scripts\DateExtend.js" />
     <Content Include="Scripts\datetime\jquery-1.11.0.min.js" />
@@ -115,6 +117,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\keyCount.js" />
     <Content Include="Scripts\leetcode.js" />
     <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\main.js" />
