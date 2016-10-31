@@ -41,7 +41,7 @@ namespace Bruce.Plan.ScheduledTask
 
         public void RunAll()
         {
-            XmlDocument doc = new XmlDataDocument();
+            XmlDocument doc = new XmlDocument();
             doc.LoadXml(ReadFile());
             var dayList = doc.SelectNodes("tdata/days/onedaydata");
             if (dayList != null && dayList.Count > 0)
@@ -50,9 +50,9 @@ namespace Bruce.Plan.ScheduledTask
                 {
                     try
                     {
-                        string macAddr = dayList[i].Attributes["macaddr"].Value;
-                        string day = dayList[i].Attributes["day"].Value;
-                        string workId = dayList[i].Attributes["workid"].Value;
+                        string macAddr = dayList[i].Attributes["macaddr"].Value.Trim();
+                        string day = dayList[i].Attributes["day"].Value.Trim();
+                        string workId = dayList[i].Attributes["workid"].Value.Trim();
                         int keyCount = Convert.ToInt32(dayList[i].InnerText);
                         if (!CheckDataExist(workId, macAddr, day, _userId))
                         {
@@ -76,7 +76,7 @@ namespace Bruce.Plan.ScheduledTask
 
         public void Run()
         {
-            XmlDocument doc = new XmlDataDocument();
+            XmlDocument doc = new XmlDocument();
             doc.LoadXml(ReadFile());
             var dayList = doc.SelectNodes("tdata/days/onedaydata");
             DateTime lastAddTime = DateTime.Now;
@@ -86,18 +86,18 @@ namespace Bruce.Plan.ScheduledTask
                 {
                     try
                     {
-                        string macAddr = dayList[i].Attributes["macaddr"].Value;
+                        string macAddr = dayList[i].Attributes["macaddr"].Value.Trim();
                         if (i == 0)
                         {
-                            lastAddTime = GetLastUpdateTimeInThisMac(macAddr, _userId);
+                            lastAddTime = GetLastUpdateTimeInThisMac(macAddr, _userId).Date;
                         }
-                        DateTime timeStamp = DateTime.Parse(dayList[i].Attributes["timesatmp"].Value).Date;
+                        DateTime timeStamp = DateTime.Parse(dayList[i].Attributes["timesatmp"].Value);
                         if (timeStamp < lastAddTime)
                         {
                             continue;
                         }
-                        string day = dayList[i].Attributes["day"].Value;
-                        string workId = dayList[i].Attributes["workid"].Value;
+                        string day = dayList[i].Attributes["day"].Value.Trim();
+                        string workId = dayList[i].Attributes["workid"].Value.Trim();
                         int keyCount = Convert.ToInt32(dayList[i].InnerText);
                         if (!CheckDataExist(workId, macAddr, day, _userId))
                         {
@@ -137,7 +137,8 @@ namespace Bruce.Plan.ScheduledTask
                         cmd.Parameters.Add(p);
                     }
                     conn.Open();
-                    return Convert.ToDateTime(cmd.ExecuteScalar());
+                    var result = cmd.ExecuteScalar();
+                    return result == DBNull.Value ? DateTime.Now : Convert.ToDateTime(result);
                 }
             }
         }
