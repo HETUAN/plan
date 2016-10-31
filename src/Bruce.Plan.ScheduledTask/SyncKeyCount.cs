@@ -16,10 +16,10 @@ namespace Bruce.Plan.ScheduledTask
         {
             _databaseConnStr = "Data Source=.;Initial Catalog=Bruce;User ID=sa;Password=123.com;";
             _localPath = @"C:\tdata.td";
-            _userId = 13;
+            _userId = 12;
         }
 
-        public void Run()
+        public void RunAll()
         {
             XmlDocument doc = new XmlDataDocument();
             doc.LoadXml(ReadFile());
@@ -32,12 +32,18 @@ namespace Bruce.Plan.ScheduledTask
                     {
                         string macAddr = dayList[i].Attributes["macaddr"].Value;
                         string day = dayList[i].Attributes["day"].Value;
-                        if (!CheckDataExist(macAddr, day))
+                        string workId = dayList[i].Attributes["workid"].Value;
+                        int keyCount = Convert.ToInt32(dayList[i].InnerText);
+                        if (!CheckDataExist(workId, macAddr, day, _userId))
                         {
-                            string workId = dayList[i].Attributes["workid"].Value;
                             DateTime timeStamp = DateTime.Parse(dayList[i].Attributes["timesatmp"].Value);
-                            int keyCount = Convert.ToInt32(dayList[i].InnerText);
                             InsertDay(workId, macAddr, day, timeStamp, keyCount, _userId);
+                            Console.WriteLine("ADD:" + day);
+                        }
+                        else
+                        {
+                            UpdateDay(workId, macAddr, day, keyCount, _userId);
+                            Console.WriteLine("UPDATE:" + day);
                         }
                     }
                     catch (Exception ex)
@@ -48,15 +54,85 @@ namespace Bruce.Plan.ScheduledTask
             }
         }
 
-        private bool CheckDataExist(string macaddr, string day)
+        public void Run()
+        {
+            XmlDocument doc = new XmlDataDocument();
+            doc.LoadXml(ReadFile());
+            var dayList = doc.SelectNodes("tdata/days/onedaydata");
+            DateTime lastAddTime = DateTime.Now;
+            if (dayList != null && dayList.Count > 0)
+            {
+                for (int i = 0; i < dayList.Count; i++)
+                {
+                    try
+                    {
+                        string macAddr = dayList[i].Attributes["macaddr"].Value;
+                        if (i == 0)
+                        {
+                            lastAddTime = GetLastUpdateTimeInThisMac(macAddr, _userId);
+                        }
+                        DateTime timeStamp = DateTime.Parse(dayList[i].Attributes["timesatmp"].Value).Date;
+                        if (timeStamp < lastAddTime)
+                        {
+                            continue;
+                        }
+                        string day = dayList[i].Attributes["day"].Value;
+                        string workId = dayList[i].Attributes["workid"].Value;
+                        int keyCount = Convert.ToInt32(dayList[i].InnerText);
+                        if (!CheckDataExist(workId, macAddr, day, _userId))
+                        {
+                            InsertDay(workId, macAddr, day, timeStamp, keyCount, _userId);
+                            Console.WriteLine("ADD:" + day);
+                        }
+                        else
+                        {
+                            UpdateDay(workId, macAddr, day, keyCount, _userId);
+                            Console.WriteLine("UPDATE:" + day);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private DateTime GetLastUpdateTimeInThisMac(string macaddr, int userId)
+        {
+            string cmdText = "SELECT MAX(AddTime) FROM KeyCount WHERE MacAddr = @MacAddr AND UserId = @UserId";
+            SqlParameter[] param =
+            {
+                new SqlParameter("@MacAddr", macaddr), 
+                new SqlParameter("@UserId", userId)
+            };
+
+            using (SqlConnection conn = new SqlConnection(_databaseConnStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(cmdText, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    foreach (SqlParameter p in param)
+                    {
+                        cmd.Parameters.Add(p);
+                    }
+                    conn.Open();
+                    return Convert.ToDateTime(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+        private bool CheckDataExist(string workId, string macaddr, string day, int userId)
         {
             //
             int rows;
-            string cmdText = "SELECT COUNT(1) FROM KeyCount WHERE MacAddr = @MacAddr AND Day = @Day";
+            string cmdText = "SELECT COUNT(1) FROM KeyCount WHERE MacAddr = @MacAddr AND Day = @Day AND WorkId = @WorkId AND UserId = @UserId";
             SqlParameter[] param =
             {
                 new SqlParameter("@MacAddr", macaddr),
-                new SqlParameter("@Day", day)
+                new SqlParameter("@Day", day),
+                new SqlParameter("@WorkId", workId),
+                new SqlParameter("@UserId", userId)
             };
 
             using (SqlConnection conn = new SqlConnection(_databaseConnStr))
@@ -84,6 +160,36 @@ namespace Bruce.Plan.ScheduledTask
                 new SqlParameter("@MacAddr", macAddr),
                 new SqlParameter("@Day", day),
                 new SqlParameter("@TimeStamp", timeStamp),
+                new SqlParameter("@KCount", keyCount),
+                new SqlParameter("@UserId", userId)
+            };
+
+            using (SqlConnection conn = new SqlConnection(_databaseConnStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(cmdText, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    foreach (SqlParameter p in param)
+                    {
+                        cmd.Parameters.Add(p);
+                    }
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void UpdateDay(string workId, string macAddr, string day, int keyCount, int userId)
+        {
+            //
+
+            string cmdText = @"UPDATE [KeyCount] SET [KCount] = @KCount,[UpdateTime] = GETDATE()
+                                 WHERE [WorkId] = @WorkId AND [MacAddr] = @MacAddr AND [Day] = @Day AND  [UserId] = @UserId";
+            SqlParameter[] param =
+            {
+                new SqlParameter("@WorkId", workId),
+                new SqlParameter("@MacAddr", macAddr),
+                new SqlParameter("@Day", day), 
                 new SqlParameter("@KCount", keyCount),
                 new SqlParameter("@UserId", userId)
             };

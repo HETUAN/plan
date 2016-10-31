@@ -11,5 +11,7 @@ namespace Bruce.Paln.Entity
         public DateTime TimeStamp { get; set; }
         public int KCount { get; set; }
         public int UserId { get; set; }
+        public DateTime AddTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }
