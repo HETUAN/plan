@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading;
 using System.Xml;
 
 namespace Bruce.Plan.ScheduledTask
@@ -12,11 +13,30 @@ namespace Bruce.Plan.ScheduledTask
         private readonly string _databaseConnStr;
         private readonly int _userId;
 
+
         public SyncKeyCount()
         {
             _databaseConnStr = "Data Source=.;Initial Catalog=Bruce;User ID=sa;Password=123.com;";
             _localPath = @"C:\tdata.td";
             _userId = 12;
+        }
+
+
+        public void RunAsService()
+        {
+            //
+            Thread thread = new Thread(new ThreadStart(ThreadTask));
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        private void ThreadTask()
+        {
+            while (true)
+            {
+                Run();
+                Thread.Sleep(3600000);
+            }
         }
 
         public void RunAll()

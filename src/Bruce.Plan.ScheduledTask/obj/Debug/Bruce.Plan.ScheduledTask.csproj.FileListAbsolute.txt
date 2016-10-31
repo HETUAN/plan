@@ -3,4 +3,5 @@ E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\bin\Debug\Bruce.Plan.Sched
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\bin\Debug\Bruce.Plan.ScheduledTask.pdb
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\obj\Debug\Bruce.Plan.ScheduledTask.exe
 E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\obj\Debug\Bruce.Plan.ScheduledTask.pdb
-E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\obj\Debug\Bruce.Plan.ScheduledTask.csprojResolveAssemblyReference.cache
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\obj\Debug\Bruce.Plan.ScheduledTask.ProjectInstaller.resources
+E:\HEPW\MySpace\NET\Plan\src\Bruce.Plan.ScheduledTask\obj\Debug\Bruce.Plan.ScheduledTask.csproj.GenerateResource.Cache
