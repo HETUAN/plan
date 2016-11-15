@@ -118,6 +118,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\keyCount.js" />
+    <Content Include="Scripts\keycount\keycountmain.js" />
     <Content Include="Scripts\leetcode.js" />
     <Content Include="Scripts\remind.js" />
     <Content Include="Scripts\main.js" />
@@ -159,6 +160,7 @@
     <Content Include="Scripts\learn\jx.base.js" />
     <Content Include="StaticData\LeetCodeList.json" />
     <Content Include="Views\LeetCode\Index.cshtml" />
+    <Content Include="Views\KeyCount\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,7 +171,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Daily\" />
-    <Folder Include="Views\KeyCount\" />
     <Folder Include="Views\Note\" />
   </ItemGroup>
   <ItemGroup>

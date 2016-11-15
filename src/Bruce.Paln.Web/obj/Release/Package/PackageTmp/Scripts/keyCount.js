@@ -87,7 +87,8 @@ define(['DateExtend', 'echarts'],
                     } else {
                         table.style.display = "block";
                     }
-                })
+                }); 
+
         }
         /*
         var keyCount = function () { }

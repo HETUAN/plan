@@ -1,14 +1,16 @@
 ﻿require.config({
     baseUrl: '',
     paths: {
+        jquery: '../Scripts/jquery-2.1.1.min',
         DateExtend: '../Scripts/DateExtend',
         echarts: '../Scripts/charts/echarts.min'
     }
 });
-define(['DateExtend', 'echarts'],
-    function (DateExtend, echarts) {
+define(['jquery', 'DateExtend', 'echarts'],
+    function (jquery, DateExtend, echarts) {
+        var $ = jquery;
         var keyCount = function () {
-            $.get("../KeyCount/GetLastSevenDaysData?" + (new Date()).getMilliseconds(),
+            $.get("../KeyCount/GetData?sday=" + new Date().AddMonth(-1).Formate('yyyy-MM-dd') + "&eday=" + (new Date).Formate('yyyy-MM-dd'),
                 function (data) {
                     // 
                     //console.log(data);
@@ -21,13 +23,13 @@ define(['DateExtend', 'echarts'],
                     var xAxisData = [];
                     var showData = [];
                     for (var i = 0; i < data.length; i++) {
-                        xAxisData.unshift(new Date(data[i]["Day"]).getCnWeek());
+                        xAxisData.unshift(new Date(data[i]["Day"]).Formate('yyyy-MM-dd'));
                         showData.unshift(data[i]["KCount"]);
                     }
 
                     var option = {
                         title: {
-                            text: '最近七天数据统计'
+                            text: '最近数据统计'
                         },
                         tooltip: {
                             trigger: 'axis'
@@ -75,20 +77,6 @@ define(['DateExtend', 'echarts'],
                     //
                     chart.setOption(option);
                 });
-
-
-            var openKeyCount = document.getElementById("openKeyCount");
-            console.log(openKeyCount);
-            openKeyCount.addEventListener('click',
-                function (e) {
-                    var table = document.getElementById('keyCount');
-                    if (table.style.display == "block") {
-                        table.style.display = "none";
-                    } else {
-                        table.style.display = "block";
-                    }
-                }); 
-
         }
         /*
         var keyCount = function () { }
@@ -100,5 +88,6 @@ define(['DateExtend', 'echarts'],
         };
         return keyCount;
          */
+        keyCount();
         return keyCount;
     });
