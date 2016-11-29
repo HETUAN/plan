@@ -59,11 +59,15 @@ namespace Bruce.Plan.ScheduledTask
                             DateTime timeStamp = DateTime.Parse(dayList[i].Attributes["timesatmp"].Value);
                             InsertDay(workId, macAddr, day, timeStamp, keyCount, _userId);
                             Console.WriteLine("ADD:" + day);
+                            Console.WriteLine("keyCount:" + keyCount);
+                            Console.WriteLine("---------------------------------------");
                         }
                         else
                         {
                             UpdateDay(workId, macAddr, day, keyCount, _userId);
                             Console.WriteLine("UPDATE:" + day);
+                            Console.WriteLine("keyCount:" + keyCount);
+                            Console.WriteLine("---------------------------------------");
                         }
                     }
                     catch (Exception ex)
@@ -103,11 +107,15 @@ namespace Bruce.Plan.ScheduledTask
                         {
                             InsertDay(workId, macAddr, day, timeStamp, keyCount, _userId);
                             Console.WriteLine("ADD:" + day);
+                            Console.WriteLine("keyCount:" + keyCount);
+                            Console.WriteLine("---------------------------------------");
                         }
                         else
                         {
                             UpdateDay(workId, macAddr, day, keyCount, _userId);
                             Console.WriteLine("UPDATE:" + day);
+                            Console.WriteLine("keyCount:" + keyCount);
+                            Console.WriteLine("---------------------------------------");
                         }
                     }
                     catch (Exception ex)

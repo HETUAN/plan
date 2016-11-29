@@ -14,6 +14,11 @@ namespace Bruce.Paln.Service
             _repository = new LeetQuestionRepository();
         }
 
+        /// <summary>
+        /// 取出下一个没有回答的问题
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public LeetQuestionEntity GetNextLeetQuestion(int userId)
         {
             return _repository.GetNextLeetQuestion(userId);
