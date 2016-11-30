@@ -49,6 +49,7 @@
     <Compile Include="LeetQuestationRepository.cs" />
     <Compile Include="NoteRepository.cs" />
     <Compile Include="PlanResultRepository.cs" />
+    <Compile Include="SmallNoteRepository.cs" />
     <Compile Include="UserPlanRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRepository.cs" />

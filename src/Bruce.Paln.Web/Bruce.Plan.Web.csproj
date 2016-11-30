@@ -140,6 +140,7 @@
     <Compile Include="Controllers\KeyCountController.cs" />
     <Compile Include="Controllers\LeetCodeController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
+    <Compile Include="Controllers\SmallNoteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\UserBaseAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,7 @@
     <Content Include="StaticData\LeetCodeList.json" />
     <Content Include="Views\LeetCode\Index.cshtml" />
     <Content Include="Views\KeyCount\Index.cshtml" />
+    <Content Include="Views\SmallNote\DelList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

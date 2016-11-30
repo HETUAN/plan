@@ -44,6 +44,7 @@
     <Compile Include="LeetAnswerEntity.cs" />
     <Compile Include="LeetCode\LeetCodeEntity.cs" />
     <Compile Include="LeetQuestionEntity.cs" />
+    <Compile Include="SmallNoteEntity.cs" />
     <Compile Include="NoteEntity.cs" />
     <Compile Include="PlanResultEntity.cs" />
     <Compile Include="UserPlanEntity.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\NoteViewModel.cs" />
     <Compile Include="ViewModel\PlanResultViewModel.cs" />
+    <Compile Include="ViewModel\SmallNoteViewModel.cs" />
     <Compile Include="ViewModel\UserPlanServiceViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\WeeklyViewModel.cs" />

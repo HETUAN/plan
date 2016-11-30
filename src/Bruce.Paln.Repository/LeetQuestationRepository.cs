@@ -50,16 +50,6 @@ namespace Bruce.Paln.Repository
             return base.Execute(base.OpenMsSqlConnection(), sql, new { UserId = userId, LeetCodeId = leetCodeId, Status = status });
         }
 
-
-        public int Update(int userId, int leetCodeId, int answer)
-        {
-            string sql = @"UPDATE [Leet_Answer]
-                               SET [Answer] = @Answer
-                                  ,[UpdateTime] = GETDATE()
-                             WHERE [UserId] = @UserId AND [LeetCodeId] = @LeetCodeId ";
-            return base.Execute(base.OpenMsSqlConnection(), sql, new { UserId = userId, LeetCodeId = leetCodeId, Answer = answer });
-        }
-
         public LeetQuestionEntity GetNextLeetQuestion(int userId)
         {
             //
