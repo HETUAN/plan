@@ -9,9 +9,9 @@ namespace Bruce.Paln.Repository
         public int Insert(LeetAnswerEntity entity)
         {
             string sql = @"INSERT INTO [Leet_Answer]
-                                        ([Id],[UserId],[LeetCodeId],[Status],[Answer])
+                                        ([UserId],[LeetCodeId],[Status],[Answer])
                                     VALUES
-                                        (@Id,@UserId,@LeetCodeId,@STATUS,@Answer)";
+                                        (@UserId,@LeetCodeId,@STATUS,@Answer)";
             return base.Execute(OpenMsSqlConnection(), sql, entity);
         }
 
@@ -24,7 +24,6 @@ namespace Bruce.Paln.Repository
                                  WHERE  Id = @Id";
             return 0;
         }
-
 
     }
 }

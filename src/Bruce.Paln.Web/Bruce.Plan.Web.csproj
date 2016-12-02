@@ -127,6 +127,7 @@
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\require.min.js" />
     <Content Include="Scripts\ring.mp3" />
+    <Content Include="Scripts\smallnote.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\weather.js" />
     <Content Include="Web.config" />

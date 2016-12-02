@@ -59,8 +59,8 @@ namespace Bruce.Paln.Repository
                                       ,[PaidOnly],[Frequency],[Progress]
                               FROM [Leet_Question] lq 
                                   LEFT JOIN  (SELECT * FROM Leet_Answer WHERE UserId = @UserId )la 
-                                  ON la.LeetCodeId = lq.question_id 
-                                  WHERE la.Status IS NULL OR la.status = 0 ORDER BY lq.[question_id] ";
+                                  ON la.LeetCodeId = lq.QuestionId 
+                                  WHERE la.Status IS NULL OR la.status = 0 ORDER BY lq.[QuestionId] ";
             return base.QuerySingle<LeetQuestionEntity>(OpenMsSqlConnection(), sql,
                 new
                 {

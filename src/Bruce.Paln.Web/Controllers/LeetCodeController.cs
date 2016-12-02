@@ -29,7 +29,7 @@ namespace Bruce.Paln.Web.Controllers
             return Json(_leetCode.GetAllQuestion(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetNextQuestuion()
+        public JsonResult GetNextQuestion()
         {
             LeetQuestionService _service = new LeetQuestionService();
             return Json(_service.GetNextLeetQuestion(Account.UserId), JsonRequestBehavior.AllowGet);
