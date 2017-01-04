@@ -41,7 +41,7 @@ namespace Bruce.Paln.Repository
                                 ,[NState] 
                                 ,[CreateTime]
                                 ,[UpdateTime]
-                              FROM [SmallNote] WHERE UserId = @UserId AND NState = @NState ORDER BY AddTime";
+                              FROM [SmallNote] WHERE UserId = @UserId AND NState = @NState ORDER BY CreateTime";
             return Query<SmallNoteEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, NState = state });
         }
 
@@ -56,10 +56,10 @@ namespace Bruce.Paln.Repository
                                     [UpdateTime]
                             FROM    ( SELECT    ROW_NUMBER() OVER ( ORDER BY CreateTime DESC ) AS OrderId ,
                                                 *
-                                      FROM      [Note]
+                                      FROM      [SmallNote]
                                     ) T
                             WHERE UserId = @UserId AND OrderId > @StartIndex  AND OrderId <= @EndIndex {0} ORDER BY CreateTime DESC;
-                           SELECT COUNT(1) FROM [Note] WHERE UserId = @UserId {0}";
+                           SELECT COUNT(1) FROM [SmallNote] WHERE UserId = @UserId {0}";
             List<string> where = new List<string>();
             if (title.Trim() != "")
                 where.Add("Ttile LIKE '%'+@Title+'%'");
@@ -76,7 +76,7 @@ namespace Bruce.Paln.Repository
 
         public int Insert(SmallNoteEntity model)
         {
-            string sql = @"INSERT INTO [Note]
+            string sql = @"INSERT INTO [SmallNote]
                                        ([UserId]
                                        ,[Note]
                                        ,[NState]
@@ -93,7 +93,7 @@ namespace Bruce.Paln.Repository
 
         public int Update(NoteEntity model)
         {
-            string sql = @"UPDATE [Note]
+            string sql = @"UPDATE [SmallNote]
                                            SET  [Note] = @Note 
                                               ,[NState] = @NState
                                               ,[UpdateTime] = GETDATE()
@@ -103,7 +103,7 @@ namespace Bruce.Paln.Repository
 
         public int UpdateState(int id, int state, int userId)
         {
-            string sql = @"UPDATE [Note]
+            string sql = @"UPDATE [SmallNote]
                                            SET [NState] = @NState
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id AND UserID = @UserId";
@@ -112,7 +112,7 @@ namespace Bruce.Paln.Repository
 
         public int UpdateNote(int id, string note, int userId)
         {
-            string sql = @"UPDATE [Note]
+            string sql = @"UPDATE [SmallNote]
                                            SET [Note] = @Note 
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id AND UserID = @UserId";
@@ -121,7 +121,7 @@ namespace Bruce.Paln.Repository
 
         public int Delete(int id, int userId)
         {
-            string sql = @"DELETE FROM [Daily] WHERE Id = @Id AND UserID = @UserId";
+            string sql = @"DELETE FROM [SmallNote] WHERE Id = @Id AND UserID = @UserId";
             return Execute(OpenMsSqlConnection(), sql, new { Id = id, UserId = userId });
         }
 

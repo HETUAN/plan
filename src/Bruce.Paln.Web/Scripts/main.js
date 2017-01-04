@@ -13,7 +13,8 @@
         Plan: '../Scripts/plan',
         Weather: '../Scripts/weather',
         KeyCount: '../Scripts/KeyCount',
-        LeetCode: '../Scripts/leetcode'
+        LeetCode: '../Scripts/leetcode',
+        SmallNote: '../Scripts/smallnote'
         //jqueryui: '../Scripts/datetime/jquery-ui-1.10.4.custom.min.js',
         //jqueryuidatepickerCN: '../Scripts/datetime/jquery.ui.datepicker-zh-CN.js',
         //jqueryuitimepacker: '../Scripts/datetime/jquery-ui-timepicker-addon.js',
@@ -26,7 +27,7 @@
     }
 });
 
-define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind', 'Plan', 'Weather', 'KeyCount', 'LeetCode'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind, Plan, Weather, KeyCount,leetcode) {
+define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User', 'Daily', 'Note', 'Remind', 'Plan', 'Weather', 'KeyCount', 'LeetCode', 'SmallNote'], function (jQuery, DateExtend, bootstrap, moment, datetimepicker, User, Daily, Note, Remind, Plan, Weather, KeyCount, leetcode,smallnote) {
     //console.log($);
     var $ = jQuery;
 
@@ -55,7 +56,8 @@ define(['jquery', 'DateExtend', 'bootstrap', 'moment', 'datetimepicker', 'User',
 
     KeyCount();
     (new leetcode()).LoadData();
-
+    (new smallnote()).Init();
+    
     //var remind = new Remind.Remind();
     //remind.Run();
     //var userVM = function () { }
